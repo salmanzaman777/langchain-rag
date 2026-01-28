@@ -2,42 +2,68 @@
 
 > Build a Retrieval Augmented Generation (RAG) system using LangChain, ChromaDB, and Groq.
 
-**Prepared by: Salman Zaman** | Certified Google Cloud Generative AI Leader | Certified Chief AI Officer (CAIO) | Certified Google Cloud Digital Leader | Certified Data Scientist | ISACA Certified Information Systems Auditor (CISA) | Certified IBM OnDemand Business Solution Designer | Certified IBM Enterprise Content Manager
+**Prepared by: Salman Zaman** | Certified Google Cloud Generative AI Leader | Certified Chief AI Officer (CAIO) | Certified Google Cloud Digital Leader | Certified Mastery in Data Science | Certified Information Systems Auditor (CISA) | Certified IBM OnDemand Business Solution Designer | Certified Java Programmer | Certified IBM DB2 Enterprise Content Manager | Certified IBM Lotus Notes/Domino Application Developer
 
 ---
 
 ## Prerequisites
 
-- Windows 10/11 (or macOS/Linux with minor adjustments)
-- VS Code installed
-- uv installed ([install guide](https://docs.astral.sh/uv/getting-started/installation/))
-- Groq API Key (free at https://console.groq.com)
+Before starting, ensure you have:
+
+- **Operating System:** Windows 10/11, macOS, or Linux
+- **VS Code** installed ([download here](https://code.visualstudio.com/))
+- **uv** installed ([install guide](https://docs.astral.sh/uv/getting-started/installation/))
+- **Groq API Key** (free at https://console.groq.com)
+
+---
+
+# PART 1: Project Initialization
 
 ---
 
 ## Step 1: Create Project Folder
 
-Create a folder for your project and open it in VS Code:
+Create a folder for your project and open it in VS Code.
 
+**Windows (CMD / PowerShell):**
+```cmd
+mkdir langchain_rag
+cd langchain_rag
+code .
+```
+
+**Linux / Bash / Git Bash:**
 ```bash
 mkdir langchain_rag
 cd langchain_rag
 code .
 ```
 
-Or open VS Code → **File** → **Open Folder** → select your folder.
+**macOS:**
+```bash
+mkdir langchain_rag
+cd langchain_rag
+code .
+```
+
+**Alternative:** Open VS Code → **File** → **Open Folder** → select/create your folder.
 
 ---
 
 ## Step 2: Initialize Project with uv
 
-Open terminal in VS Code (`Ctrl + `` `) and run:
+Open terminal in VS Code (`Ctrl + `` ` on Windows/Linux, `Cmd + `` ` on macOS) and run:
 
+**All Platforms:**
 ```bash
 uv init
 ```
 
-This creates: `pyproject.toml`, `main.py`, `.python-version`, `README.md`
+This creates the following files:
+- `pyproject.toml` - Project configuration
+- `main.py` - Main Python file
+- `.python-version` - Python version specification
+- `README.md` - Project readme
 
 ---
 
@@ -46,40 +72,65 @@ This creates: `pyproject.toml`, `main.py`, `.python-version`, `README.md`
 1. Go to https://console.groq.com
 2. Sign up / Log in
 3. Click **API Keys** → **Create API Key**
-4. Copy and save the key (you won't see it again)
+4. Copy and save the key immediately
+
+> **Important:** Copy your API key right away. You won't be able to see it again after closing the dialog!
+
+---
+
+# PART 2: Configuration
 
 ---
 
 ## Step 4: Create .env File
 
-1. Create a file named `.env` in project root
+1. In VS Code, create a new file named `.env` in your project root
 2. Add your API key:
 
-```
+```env
 GROQ_API_KEY=your_api_key_here
 ```
+
+Replace `your_api_key_here` with your actual Groq API key.
+
+> **Note:** The `.env` file stores sensitive information. Never share this file or commit it to Git!
 
 ---
 
 ## Step 5: Create .gitignore
 
-Create `.gitignore` file with:
+Create a file named `.gitignore` in your project root with the following content:
 
-```
-# Python
+```gitignore
+# Python-generated files
 __pycache__/
 *.py[oc]
-.venv/
+build/
+dist/
+wheels/
+*.egg-info
 
-# Secrets
+# Virtual environments
+.venv
+
+# Environment variables (secrets)
 .env
 .env.local
+.env.*.local
+
+# Vector Stores
+chroma_db/
 ```
+
+> **Security Warning:** Never commit your `.env` file to Git. API keys in public repositories can be stolen and misused!
 
 ---
 
 ## Step 6: Install Dependencies
 
+Run this command to install all required packages:
+
+**All Platforms:**
 ```bash
 uv add langchain langchain-groq langchain-community langchain-text-splitters langchain-huggingface langchain-chroma pypdf beautifulsoup4 lxml python-dotenv
 ```
@@ -100,6 +151,14 @@ uv add langchain langchain-groq langchain-community langchain-text-splitters lan
 
 ## Step 7: Create Data Folder and Add Documents
 
+Create a folder to store your documents:
+
+**Windows (CMD / PowerShell):**
+```cmd
+mkdir data
+```
+
+**Linux / Bash / Git Bash / macOS:**
 ```bash
 mkdir data
 ```
@@ -338,40 +397,70 @@ if __name__ == "__main__":
 
 ---
 
+# PART 3: Running the Project
+
+---
+
 ## Step 9: Run the Project
 
+**All Platforms:**
 ```bash
 uv run main.py
 ```
 
-First run downloads the embedding model (~90MB). Subsequent runs are faster.
+**What happens on first run:**
+1. Downloads the embedding model (~90MB) - this only happens once
+2. Loads your documents (text, PDF, web)
+3. Creates embeddings and stores them in ChromaDB
+4. Starts the interactive Q&A session
+
+Subsequent runs are faster since the model is cached.
 
 ---
 
-## Step 10: Exit
+## Step 10: Interact with Your RAG System
 
-Type `quit`, `exit`, or press `Ctrl + C`.
+Once running, you can ask questions about your documents:
+
+```
+You: What is attention in transformers?
+AI: [Answer based on your documents]
+
+You: What are autonomous agents?
+AI: [Answer based on the web document]
+```
+
+---
+
+## Step 11: Exit the Application
+
+Type `quit`, `exit`, or `q` to stop the program.
+
+Or press `Ctrl + C` to force quit.
 
 ---
 
 ## Project Structure
+
+After completing all steps, your project should look like this:
 
 ```
 langchain_rag/
 ├── .env                 # API key (DO NOT COMMIT)
 ├── .gitignore           # Git ignore rules
 ├── .python-version      # Python version
-├── .venv/               # Virtual environment
-├── chroma_db/           # Vector database (created on run)
+├── .venv/               # Virtual environment (created by uv)
+├── chroma_db/           # Vector database (created on first run)
 ├── data/
 │   ├── text_file.txt    # Your text content
 │   └── attention.pdf    # Transformer paper (or any PDF)
 ├── main.py              # Main application
 ├── pyproject.toml       # Project config
-└── uv.lock              # Dependency lock
+├── README.md            # Project readme
+└── uv.lock              # Dependency lock file
 ```
 
-**Data Sources:**
+**Data Sources Summary:**
 | Source | Location/URL |
 |--------|--------------|
 | Text | `./data/text_file.txt` |
@@ -380,7 +469,248 @@ langchain_rag/
 
 ---
 
-## Troubleshooting
+# PART 4: GitHub Lab
+
+Push your project to GitHub securely and learn essential Git commands.
+
+---
+
+## Step 12: Create a GitHub Account
+
+If you don't have a GitHub account, follow these steps:
+
+1. Go to https://github.com
+2. Click **Sign up**
+3. Enter your email address
+4. Create a password (min 8 characters, include a number and lowercase letter)
+5. Choose a username (this will be your public identity)
+6. Complete the verification puzzle
+7. Verify your email by clicking the link sent to your inbox
+
+> **Tip:** Choose a professional username - it will appear in all your repository URLs.
+
+---
+
+## Step 13: Install Git
+
+### Windows
+
+**Option 1: Download Installer (Recommended for beginners)**
+1. Go to: https://git-scm.com/download/win
+2. Download will start automatically
+3. Run the installer
+4. Use default options - click Next through all steps
+5. Restart VS Code after installation
+
+**Option 2: Using winget (PowerShell)**
+```powershell
+winget install Git.Git
+```
+
+### Linux
+
+**Ubuntu / Debian:**
+```bash
+sudo apt update && sudo apt install git
+```
+
+**Fedora:**
+```bash
+sudo dnf install git
+```
+
+**Arch Linux:**
+```bash
+sudo pacman -S git
+```
+
+### macOS
+
+**Option 1: Using Xcode Command Line Tools (Recommended)**
+```bash
+xcode-select --install
+```
+
+**Option 2: Using Homebrew**
+```bash
+brew install git
+```
+
+---
+
+## Step 14: Verify Git Installation
+
+After installation, verify Git is working:
+
+**All Platforms:**
+```bash
+git --version
+```
+
+You should see something like: `git version 2.43.0`
+
+If you get "command not found", restart your terminal or VS Code.
+
+---
+
+## Step 15: Configure Git Identity
+
+Set your name and email (use the same email as your GitHub account):
+
+**All Platforms:**
+```bash
+git config --global user.name "Your Full Name"
+git config --global user.email "your.email@example.com"
+```
+
+Verify your configuration:
+
+```bash
+git config --list
+```
+
+You should see your name and email in the output.
+
+---
+
+## Step 16: Create a New Repository on GitHub
+
+1. Go to https://github.com/new
+2. **Repository name:** `langchain-rag`
+3. **Description:** "RAG pipeline with LangChain, ChromaDB, and Groq"
+4. Select **Public** (or Private if you prefer)
+5. **DO NOT** check "Add a README" (we already have files)
+6. Click **Create repository**
+
+---
+
+## Step 17: Initialize and Push to GitHub
+
+> **Security Check:** Before pushing, ensure your `.gitignore` file includes `.env` to prevent exposing your API key!
+
+In VS Code terminal, run these commands (in your project folder):
+
+**All Platforms:**
+```bash
+# Step 1: Initialize git repository
+git init
+
+# Step 2: Add all files (respects .gitignore)
+git add .
+
+# Step 3: Create first commit
+git commit -m "Initial commit: LangChain RAG pipeline"
+
+# Step 4: Rename branch to main
+git branch -M main
+
+# Step 5: Connect to your GitHub repository (replace YOUR_USERNAME)
+git remote add origin https://github.com/YOUR_USERNAME/langchain-rag.git
+
+# Step 6: Push to GitHub
+git push -u origin main
+```
+
+> **First Push:** GitHub will prompt you to authenticate. Sign in with your browser when prompted, or use a Personal Access Token.
+
+---
+
+## Step 18: Verify Your Push
+
+1. Go to `https://github.com/YOUR_USERNAME/langchain-rag`
+2. You should see all your project files
+
+> **Security Confirmation:** Check that `.env` is NOT visible in your GitHub repository. If it is, remove it immediately and regenerate your API key!
+
+---
+
+## Essential Git Commands Reference
+
+### Daily Workflow Commands
+
+| Command | Purpose |
+|---------|---------|
+| `git status` | See changed/staged files |
+| `git add .` | Stage all changes |
+| `git add filename` | Stage specific file |
+| `git commit -m "message"` | Commit staged changes |
+| `git push` | Upload commits to GitHub |
+| `git pull` | Download latest from GitHub |
+
+### Viewing History & Changes
+
+| Command | Purpose |
+|---------|---------|
+| `git log --oneline` | View commit history (compact) |
+| `git log` | View detailed commit history |
+| `git diff` | See unstaged changes |
+| `git diff --staged` | See staged changes |
+
+### Branching (For Advanced Workflows)
+
+| Command | Purpose |
+|---------|---------|
+| `git branch` | List all branches |
+| `git branch feature-name` | Create new branch |
+| `git checkout feature-name` | Switch to branch |
+| `git checkout -b feature-name` | Create and switch in one step |
+| `git merge feature-name` | Merge branch into current |
+
+### Undoing Changes
+
+| Command | Purpose |
+|---------|---------|
+| `git checkout -- filename` | Discard changes in file |
+| `git reset HEAD filename` | Unstage a file |
+| `git reset --soft HEAD~1` | Undo last commit (keep changes) |
+
+---
+
+## Typical Update Workflow
+
+When you make changes to your project:
+
+**All Platforms:**
+```bash
+# 1. Check what changed
+git status
+
+# 2. Stage your changes
+git add .
+
+# 3. Commit with a descriptive message
+git commit -m "Add feature: support for CSV file loading"
+
+# 4. Push to GitHub
+git push
+```
+
+---
+
+## Cloning Your Repo on Another Machine
+
+If you need to work on your project from a different computer:
+
+**All Platforms:**
+```bash
+git clone https://github.com/YOUR_USERNAME/langchain-rag.git
+cd langchain-rag
+```
+
+> **Remember:** After cloning, create a new `.env` file with your API key - it won't be in the repo!
+
+---
+
+## Git Security Best Practices
+
+- **Never commit secrets:** Always use `.gitignore` for `.env`, API keys, passwords
+- **Review before pushing:** Run `git status` and `git diff` before committing
+- **Use meaningful commits:** Write clear messages describing what changed
+- **If you accidentally push secrets:** Immediately revoke/regenerate the exposed key
+
+---
+
+# Troubleshooting
 
 | Problem | Solution |
 |---------|----------|
@@ -389,11 +719,15 @@ langchain_rag/
 | `GROQ_API_KEY not found` | Check `.env` file exists with correct format |
 | `API key invalid` | Get new key from https://console.groq.com/keys |
 | `Connection error` | Check internet connection |
-| Slow first run | Normal - downloading embedding model |
+| `git is not recognized` | Restart terminal/VS Code after Git installation |
+| `Permission denied (publickey)` | Use HTTPS URL instead of SSH, or set up SSH keys |
+| Slow first run | Normal - downloading embedding model (~90MB) |
 
 ---
 
-## Quick Reference
+# Quick Reference
+
+## uv Commands
 
 | Action | Command |
 |--------|---------|
@@ -403,16 +737,28 @@ langchain_rag/
 | List packages | `uv pip list` |
 | Remove package | `uv remove package-name` |
 
+## Git Commands
+
+| Action | Command |
+|--------|---------|
+| Initialize repo | `git init` |
+| Stage all files | `git add .` |
+| Commit changes | `git commit -m "message"` |
+| Push to remote | `git push` |
+| Pull from remote | `git pull` |
+| Check status | `git status` |
+
 ---
 
-## Customization
+# Customization Options
 
-- **chunk_size**: Smaller = precise, larger = more context
-- **temperature**: 0.0 = factual, 1.0 = creative
-- **k**: Number of chunks retrieved (default: 3)
+- **chunk_size**: Smaller = more precise, larger = more context (default: 1000)
+- **chunk_overlap**: Overlap between chunks to preserve context (default: 200)
+- **temperature**: 0.0 = factual/deterministic, 1.0 = creative (default: 0.0)
+- **k**: Number of chunks retrieved per query (default: 3)
 
 ---
 
 *Built with LangChain, ChromaDB, HuggingFace, and Groq*
 
-*Prepared by: Salman Zaman for the ambitious Software Development Orchestrators/Architects!*
+*Prepared by: Salman Zaman for the ambitious Software Orchestrators / Architects!*

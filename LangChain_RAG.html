@@ -6,7 +6,6 @@
     <title>Global LangChain RAG e-Lab | Multilingual Learning Experience</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-body: #f8fafc;
@@ -254,7 +253,7 @@
 
         .hero {
             text-align: center;
-            padding: 4.8rem 2rem 3.6rem;
+            padding: 4.08rem 2rem 3.06rem;
             background-color: #0f172a;
             background-image:
                 radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.25) 0px, transparent 50%),
@@ -281,6 +280,15 @@
         }
 
         .hero .content-wrapper { position: relative; z-index: 2; padding: 0; }
+
+        .hero-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
 
         .hero h1 {
             font-size: 3.5rem;
@@ -310,12 +318,11 @@
             gap: 1.5rem;
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(16px);
-            padding: 1rem 2.5rem;
+            padding: 0.8rem 2rem;
             border-radius: 100px;
             box-shadow:
                 0 10px 40px -10px rgba(96, 165, 250, 0.2),
                 inset 0 0 0 1px rgba(255,255,255,0.2);
-            margin-bottom: 2rem;
             transition: transform 0.3s ease;
         }
 
@@ -375,8 +382,8 @@
         h2 { font-size: 1.8rem; margin: 3rem 0 1.5rem; color: #1e293b; letter-spacing: -0.5px; }
         h3 { font-size: 1.4rem; margin: 2rem 0 1rem; color: #334155; }
         h4 { font-size: 1.1rem; margin: 1.5rem 0 0.75rem; color: #475569; }
-        p { margin-bottom: 1.25rem; font-size: 1.05rem; color: #475569; }
-        ul, ol { margin-bottom: 1.25rem; padding-left: 1.5rem; color: #475569; }
+        p { margin-bottom: 1.25rem; font-size: 0.84rem; color: #475569; }
+        ul, ol { margin-bottom: 1.25rem; padding-left: 1.5rem; color: #475569; font-size: 0.84rem; }
         li { margin-bottom: 0.5rem; }
         code { background: linear-gradient(135deg, #e0f2fe, #f0f9ff); padding: 3px 8px; border-radius: 4px; font-size: 0.85rem; color: #0369a1; font-weight: 500; border: 1px solid #bae6fd; }
 
@@ -570,8 +577,8 @@
             position: relative;
             display: inline-flex;
             align-items: center;
+            margin-right: 13%;
             gap: 10px;
-            margin-top: 1.5rem;
         }
 
         .lang-selector-label {
@@ -822,9 +829,11 @@
             display: block;
         }
         .logo[data-lang].active,
-        .author-badge[data-lang].active,
-        .nav-title[data-lang].active {
+        .author-badge[data-lang].active {
             display: block;
+        }
+        .nav-title[data-lang].active {
+            display: flex;
         }
         .footer-logo[data-lang].active {
             display: inline-block;
@@ -914,7 +923,10 @@
 
         .copyright {
             font-size: 0.8rem;
-            color: #ffffff;
+            background: linear-gradient(135deg, #3b82f6, #30d4c5, #32d3a6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             border-top: 1px solid rgba(255,255,255,0.1);
             padding-top: 2rem;
             margin-top: 2rem;
@@ -929,7 +941,7 @@
             width: 8px;
             height: 8px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #3b82f6, #2dd4bf, #34d399);
+            background: linear-gradient(135deg, #3b82f6, #30d4c5, #32d3a6);
             box-shadow: 0 0 12px rgba(59, 130, 246, 0.5), 0 0 20px rgba(45, 212, 191, 0.4), 0 0 30px rgba(52, 211, 153, 0.2);
             margin: 0 10px;
             vertical-align: middle;
@@ -956,7 +968,9 @@
             .hero { padding: 3.6rem 1rem 2.4rem; }
             .hero h1 { font-size: 2.5rem; }
             .hero-subtitle { font-size: 1.1rem; }
-            .tech-stack { flex-wrap: wrap; justify-content: center; padding: 1rem; border-radius: 20px; }
+            .hero-header-row { flex-direction: column; gap: 1rem; }
+            .tech-stack { flex-wrap: wrap; justify-content: center; padding: 0.8rem 1rem; border-radius: 20px; }
+            .language-dropdown-container { justify-content: center; }
             .mobile-menu-btn {
                 display: block !important;
                 position: fixed;
@@ -987,13 +1001,10 @@
             unicode-bidi: isolate;
         }
 
-        /* RTL Support for Arabic and Urdu */
+        /* RTL Support for Arabic */
         [dir="rtl"] {
             direction: rtl;
             text-align: right;
-        }
-        [lang="ur"] {
-            font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', 'Urdu Typesetting', system-ui, sans-serif;
         }
         /* RTL: Keep sidebar on left, only mirror content text direction */
         [dir="rtl"] .main-content {
@@ -1057,8 +1068,6 @@
             <span class="logo" data-lang="fr">e-LAB LangChain RAG</span>
             <span class="logo" data-lang="ar">معمل LangChain RAG</span>
             <span class="logo" data-lang="pt">e-LAB LangChain RAG</span>
-            <span class="logo" data-lang="ur">LangChain RAG ای-لیب</span>
-            <span class="logo" data-lang="ur-roman">LANGCHAIN RAG e-LAB</span>
 
             <div class="author-badge" data-lang="en">Global Learning Experience</div>
             <div class="author-badge" data-lang="zh">全球学习体验</div>
@@ -1067,8 +1076,6 @@
             <div class="author-badge" data-lang="fr">Expérience d'Apprentissage Mondiale</div>
             <div class="author-badge" data-lang="ar">تجربة تعلم عالمية</div>
             <div class="author-badge" data-lang="pt">Experiência de Aprendizado Global</div>
-            <div class="author-badge" data-lang="ur">عالمی سیکھنے کا تجربہ</div>
-            <div class="author-badge" data-lang="ur-roman">Global Seekhne Ka Tajurba</div>
         </div>
 
         <div class="nav-group group-1">
@@ -1079,8 +1086,6 @@
             <div class="nav-title" data-lang="fr">Partie 1 : On commence !</div>
             <div class="nav-title" data-lang="ar">الجزء 1: يلا نبدأ</div>
             <div class="nav-title" data-lang="pt">Parte 1: Bora Começar!</div>
-            <div class="nav-title" data-lang="ur">حصہ 1: شروع کرتے ہیں</div>
-            <div class="nav-title" data-lang="ur-roman">Hissa 1: Shuru Karte Hain</div>
 
             <a href="#prerequisites" class="nav-link" data-lang="en">Prerequisites</a>
             <a href="#prerequisites" class="nav-link" data-lang="zh">准备工作</a>
@@ -1089,8 +1094,6 @@
             <a href="#prerequisites" class="nav-link" data-lang="fr">Prérequis</a>
             <a href="#prerequisites" class="nav-link" data-lang="ar">المتطلبات</a>
             <a href="#prerequisites" class="nav-link" data-lang="pt">Pré-requisitos</a>
-            <a href="#prerequisites" class="nav-link" data-lang="ur">ضروریات</a>
-            <a href="#prerequisites" class="nav-link" data-lang="ur-roman">Zarooriyat</a>
 
             <a href="#step1" class="nav-link" data-lang="en">Create Project Folder</a>
             <a href="#step1" class="nav-link" data-lang="zh">创建项目文件夹</a>
@@ -1099,8 +1102,6 @@
             <a href="#step1" class="nav-link" data-lang="fr">Créer le Dossier</a>
             <a href="#step1" class="nav-link" data-lang="ar">إنشاء مجلد المشروع</a>
             <a href="#step1" class="nav-link" data-lang="pt">Criar Pasta do Projeto</a>
-            <a href="#step1" class="nav-link" data-lang="ur">پروجیکٹ فولڈر بنائیں</a>
-            <a href="#step1" class="nav-link" data-lang="ur-roman">Project Folder Banao</a>
 
             <a href="#step2" class="nav-link" data-lang="en">Initialize with uv</a>
             <a href="#step2" class="nav-link" data-lang="zh">用 uv 初始化</a>
@@ -1109,8 +1110,6 @@
             <a href="#step2" class="nav-link" data-lang="fr">Initialiser avec uv</a>
             <a href="#step2" class="nav-link" data-lang="ar">تهيئة باستخدام uv</a>
             <a href="#step2" class="nav-link" data-lang="pt">Inicializar com uv</a>
-            <a href="#step2" class="nav-link" data-lang="ur">uv سے شروع کریں</a>
-            <a href="#step2" class="nav-link" data-lang="ur-roman">uv se Initialize Karo</a>
 
             <a href="#step3" class="nav-link" data-lang="en">Get Groq API Key</a>
             <a href="#step3" class="nav-link" data-lang="zh">获取 Groq API 密钥</a>
@@ -1119,8 +1118,6 @@
             <a href="#step3" class="nav-link" data-lang="fr">Obtenir la Clé API Groq</a>
             <a href="#step3" class="nav-link" data-lang="ar">الحصول على مفتاح Groq API</a>
             <a href="#step3" class="nav-link" data-lang="pt">Pegar Chave API do Groq</a>
-            <a href="#step3" class="nav-link" data-lang="ur">Groq API Key حاصل کریں</a>
-            <a href="#step3" class="nav-link" data-lang="ur-roman">Groq API Key Lo</a>
         </div>
 
         <div class="nav-group group-2">
@@ -1131,8 +1128,6 @@
             <div class="nav-title" data-lang="fr">Partie 2 : Configuration</div>
             <div class="nav-title" data-lang="ar">الجزء 2: الإعدادات</div>
             <div class="nav-title" data-lang="pt">Parte 2: Configuração</div>
-            <div class="nav-title" data-lang="ur">حصہ 2: ترتیبات</div>
-            <div class="nav-title" data-lang="ur-roman">Hissa 2: Configuration</div>
 
             <a href="#step4" class="nav-link" data-lang="en">Create .env File</a>
             <a href="#step4" class="nav-link" data-lang="zh">创建 .env 文件</a>
@@ -1175,8 +1170,6 @@
             <div class="nav-title" data-lang="fr">Partie 3 : Implémentation</div>
             <div class="nav-title" data-lang="ar">الجزء 3: التنفيذ</div>
             <div class="nav-title" data-lang="pt">Parte 3: Implementação</div>
-            <div class="nav-title" data-lang="ur">حصہ 3: عمل درآمد</div>
-            <div class="nav-title" data-lang="ur-roman">Hissa 3: Implementation</div>
 
             <a href="#step8" class="nav-link" data-lang="en">The Complete Code</a>
             <a href="#step8" class="nav-link" data-lang="zh">完整代码</a>
@@ -1185,8 +1178,6 @@
             <a href="#step8" class="nav-link" data-lang="fr">Le Code Complet</a>
             <a href="#step8" class="nav-link" data-lang="ar">الكود الكامل</a>
             <a href="#step8" class="nav-link" data-lang="pt">O Código Completo</a>
-            <a href="#step8" class="nav-link" data-lang="ur">مکمل کوڈ</a>
-            <a href="#step8" class="nav-link" data-lang="ur-roman">Mukammal Code</a>
 
             <a href="#step9" class="nav-link" data-lang="en">Run the Project</a>
             <a href="#step9" class="nav-link" data-lang="zh">运行项目</a>
@@ -1221,8 +1212,6 @@
             <div class="nav-title" data-lang="fr">Partie 4 : Labo GitHub</div>
             <div class="nav-title" data-lang="ar">الجزء 4: معمل GitHub</div>
             <div class="nav-title" data-lang="pt">Parte 4: Lab do GitHub</div>
-            <div class="nav-title" data-lang="ur">حصہ 4: GitHub لیب</div>
-            <div class="nav-title" data-lang="ur-roman">Hissa 4: GitHub Lab</div>
 
             <a href="#github-setup" class="nav-link" data-lang="en">Create GitHub Account</a>
             <a href="#github-setup" class="nav-link" data-lang="zh">创建 GitHub 账号</a>
@@ -1262,15 +1251,17 @@
 
         <header class="hero">
             <div class="content-wrapper">
-                <div class="tech-stack">
-                    <div class="tech-item">LangChain</div>
-                    <div class="tech-item">ChromaDB</div>
-                    <div class="tech-item">Groq</div>
-                    <div class="tech-item">uv</div>
-                </div>
+                <!-- Hero Header Row: Tech Stack LEFT, Language Selector RIGHT -->
+                <div class="hero-header-row">
+                    <div class="tech-stack">
+                        <div class="tech-item">LangChain</div>
+                        <div class="tech-item">ChromaDB</div>
+                        <div class="tech-item">Groq</div>
+                        <div class="tech-item">uv</div>
+                    </div>
 
-                <!-- Compact Language Dropdown Selector -->
-                <div class="language-dropdown-container" id="langDropdown">
+                    <!-- Compact Language Dropdown Selector -->
+                    <div class="language-dropdown-container" id="langDropdown">
                     <span class="lang-selector-label">Language:</span>
                     <button class="language-dropdown-btn" onclick="toggleLangDropdown()">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10A15.3 15.3 0 0112 2z"/></svg>
@@ -1320,20 +1311,9 @@
                             </span>
                             <span class="lang-option-check">✓</span>
                         </button>
-                        <button class="lang-option" data-lang-code="ur" onclick="selectLanguage('ur')">
-                            <span class="lang-option-info">
-                                <span class="lang-option-name">Urdu <span class="lang-option-native">اردو</span></span>
-                            </span>
-                            <span class="lang-option-check">✓</span>
-                        </button>
-                        <button class="lang-option" data-lang-code="ur-roman" onclick="selectLanguage('ur-roman')">
-                            <span class="lang-option-info">
-                                <span class="lang-option-name">Roman Urdu</span>
-                            </span>
-                            <span class="lang-option-check">✓</span>
-                        </button>
                     </div>
                 </div>
+                </div><!-- End hero-header-row -->
 
                 <!-- Multilingual Hero Titles -->
                 <h1 style="margin-top: 1.5rem;" data-lang="en">Global LangChain RAG e-Lab</h1>
@@ -1422,13 +1402,13 @@
 
             <!-- Compact Platform Selector -->
             <div class="platform-selector-compact" id="platformSelector">
-                <div class="platform-selector-title" data-lang="en">Terminal Environment</div>
-                <div class="platform-selector-title" data-lang="zh">终端环境</div>
-                <div class="platform-selector-title" data-lang="hi">Terminal Environment</div>
-                <div class="platform-selector-title" data-lang="es">Entorno de Terminal</div>
-                <div class="platform-selector-title" data-lang="fr">Environnement Terminal</div>
-                <div class="platform-selector-title" data-lang="ar">بيئة الطرفية</div>
-                <div class="platform-selector-title" data-lang="pt">Ambiente de Terminal</div>
+                <div class="platform-selector-title" data-lang="en">Select the "Terminal Environment" you are using!</div>
+                <div class="platform-selector-title" data-lang="zh">选择您正在使用的"终端环境"！</div>
+                <div class="platform-selector-title" data-lang="hi">अपना "Terminal Environment" चुनें!</div>
+                <div class="platform-selector-title" data-lang="es">¡Selecciona el "Entorno de Terminal" que estás usando!</div>
+                <div class="platform-selector-title" data-lang="fr">Sélectionnez l'"Environnement Terminal" que vous utilisez !</div>
+                <div class="platform-selector-title" data-lang="ar">اختر "بيئة الطرفية" التي تستخدمها!</div>
+                <div class="platform-selector-title" data-lang="pt">Selecione o "Ambiente de Terminal" que você está usando!</div>
                 <div class="platform-tabs-compact">
                     <button class="platform-tab-compact powershell active" onclick="setPlatform('powershell')">
                         <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M2.5 2A1.5 1.5 0 001 3.5v17A1.5 1.5 0 002.5 22h19a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0021.5 2h-19zm0 1h19a.5.5 0 01.5.5v17a.5.5 0 01-.5.5h-19a.5.5 0 01-.5-.5v-17a.5.5 0 01.5-.5zM5.25 6L11 11l-5.75 5 1.5 1L13 11 6.75 5l-1.5 1zm6.75 9v2h7v-2h-7z"/></svg>
@@ -1473,7 +1453,7 @@
             </div>
 
             <section>
-                <h2 data-lang="en" class="active">Prerequisites</h2>
+                <h2 data-lang="en">Prerequisites</h2>
                 <h2 data-lang="zh">准备工作</h2>
                 <h2 data-lang="hi">ज़रूरी चीज़ें</h2>
                 <h2 data-lang="es">Requisitos Previos</h2>
@@ -1481,7 +1461,7 @@
                 <h2 data-lang="ar">المتطلبات الأساسية</h2>
                 <h2 data-lang="pt">Pré-requisitos</h2>
 
-                <p data-lang="en" class="active">Before starting, ensure you have:</p>
+                <p data-lang="en">Before starting, ensure you have:</p>
                 <p data-lang="zh">开始之前，确保你有这些东西：</p>
                 <p data-lang="hi">शुरू करने से पहले, ये चीज़ें होनी चाहिए:</p>
                 <p data-lang="es">Antes de empezar, asegúrate de tener:</p>
@@ -1489,7 +1469,7 @@
                 <p data-lang="ar">قبل ما نبدأ، تأكد عندك:</p>
                 <p data-lang="pt">Antes de começar, certifica-te que tens:</p>
 
-                <ul data-lang="en" class="active">
+                <ul data-lang="en">
                     <li><strong>Windows 10/11</strong> (or macOS/Linux with minor adjustments)</li>
                     <li><strong>VS Code</strong> installed</li>
                     <li><strong>uv</strong> installed - <a href="https://docs.astral.sh/uv/getting-started/installation/" target="_blank">Install Guide</a></li>
@@ -1533,7 +1513,7 @@
                 </ul>
 
                 <div id="step1">
-                    <h3 data-lang="en" class="active"><span class="step-number">1</span>Create Project Folder</h3>
+                    <h3 data-lang="en"><span class="step-number">1</span>Create Project Folder</h3>
                     <h3 data-lang="zh"><span class="step-number">1</span>创建项目文件夹</h3>
                     <h3 data-lang="hi"><span class="step-number">1</span>प्रोजेक्ट फोल्डर बनाओ</h3>
                     <h3 data-lang="es"><span class="step-number">1</span>Crear la Carpeta del Proyecto</h3>
@@ -1541,7 +1521,7 @@
                     <h3 data-lang="ar"><span class="step-number">1</span>إنشاء مجلد المشروع</h3>
                     <h3 data-lang="pt"><span class="step-number">1</span>Criar a Pasta do Projeto</h3>
 
-                    <p data-lang="en" class="active">Create a folder for your project and open it in VS Code:</p>
+                    <p data-lang="en">Create a folder for your project and open it in VS Code:</p>
                     <p data-lang="zh">给你的项目创建一个文件夹，然后用 VS Code 打开它：</p>
                     <p data-lang="hi">अपने project के लिए एक folder बनाओ और VS Code में खोलो:</p>
                     <p data-lang="es">Crea una carpeta para tu proyecto y ábrela en VS Code:</p>
@@ -1579,7 +1559,7 @@ cd langchain_rag
 code .</code></pre>
                     </div>
 
-                    <p data-lang="en" class="active">Or open VS Code → <strong>File</strong> → <strong>Open Folder</strong> → select your folder.</p>
+                    <p data-lang="en">Or open VS Code → <strong>File</strong> → <strong>Open Folder</strong> → select your folder.</p>
                     <p data-lang="zh">或者打开 VS Code → <strong>文件</strong> → <strong>打开文件夹</strong> → 选择你的文件夹。</p>
                     <p data-lang="hi">या VS Code खोलो → <strong>File</strong> → <strong>Open Folder</strong> → अपना folder select करो।</p>
                     <p data-lang="es">O abre VS Code → <strong>File</strong> → <strong>Open Folder</strong> → selecciona tu carpeta.</p>
@@ -1589,7 +1569,7 @@ code .</code></pre>
                 </div>
 
                 <div id="step2">
-                    <h3 data-lang="en" class="active"><span class="step-number">2</span>Initialize Project with uv</h3>
+                    <h3 data-lang="en"><span class="step-number">2</span>Initialize Project with uv</h3>
                     <h3 data-lang="zh"><span class="step-number">2</span>用 uv 初始化项目</h3>
                     <h3 data-lang="hi"><span class="step-number">2</span>uv से प्रोजेक्ट Initialize करो</h3>
                     <h3 data-lang="es"><span class="step-number">2</span>Inicializar el Proyecto con uv</h3>
@@ -1597,7 +1577,7 @@ code .</code></pre>
                     <h3 data-lang="ar"><span class="step-number">2</span>تهيئة المشروع باستخدام uv</h3>
                     <h3 data-lang="pt"><span class="step-number">2</span>Inicializar o Projeto com uv</h3>
 
-                    <p data-lang="en" class="active">Open terminal in VS Code (<code>Ctrl + `</code>) and run:</p>
+                    <p data-lang="en">Open terminal in VS Code (<code>Ctrl + `</code>) and run:</p>
                     <p data-lang="zh">在 VS Code 里打开终端（按 <code>Ctrl + `</code>），然后运行：</p>
                     <p data-lang="hi">VS Code में terminal खोलो (<code>Ctrl + `</code> दबाओ) और ये run करो:</p>
                     <p data-lang="es">Abre la terminal en VS Code (<code>Ctrl + `</code>) y ejecuta:</p>
@@ -1629,7 +1609,7 @@ code .</code></pre>
                         <pre><code>uv init</code></pre>
                     </div>
 
-                    <p data-lang="en" class="active">This creates: <code>pyproject.toml</code>, <code>main.py</code>, <code>.python-version</code>, <code>README.md</code></p>
+                    <p data-lang="en">This creates: <code>pyproject.toml</code>, <code>main.py</code>, <code>.python-version</code>, <code>README.md</code></p>
                     <p data-lang="zh">这会创建这些文件：<code>pyproject.toml</code>、<code>main.py</code>、<code>.python-version</code>、<code>README.md</code></p>
                     <p data-lang="hi">ये files बन जाएंगी: <code>pyproject.toml</code>, <code>main.py</code>, <code>.python-version</code>, <code>README.md</code></p>
                     <p data-lang="es">Esto crea: <code>pyproject.toml</code>, <code>main.py</code>, <code>.python-version</code>, <code>README.md</code></p>
@@ -1639,7 +1619,7 @@ code .</code></pre>
                 </div>
 
                 <div id="step3">
-                    <h3 data-lang="en" class="active"><span class="step-number">3</span>Get Groq API Key</h3>
+                    <h3 data-lang="en"><span class="step-number">3</span>Get Groq API Key</h3>
                     <h3 data-lang="zh"><span class="step-number">3</span>获取 Groq API 密钥</h3>
                     <h3 data-lang="hi"><span class="step-number">3</span>Groq API Key लो</h3>
                     <h3 data-lang="es"><span class="step-number">3</span>Obtener la Clave API de Groq</h3>
@@ -1647,7 +1627,7 @@ code .</code></pre>
                     <h3 data-lang="ar"><span class="step-number">3</span>الحصول على مفتاح Groq API</h3>
                     <h3 data-lang="pt"><span class="step-number">3</span>Pegar a Chave API do Groq</h3>
 
-                    <ol data-lang="en" class="active">
+                    <ol data-lang="en">
                         <li>Go to <a href="https://console.groq.com" target="_blank">https://console.groq.com</a></li>
                         <li>Sign up / Log in</li>
                         <li>Click <strong>API Keys</strong> → <strong>Create API Key</strong></li>
@@ -1691,7 +1671,7 @@ code .</code></pre>
                     </ol>
 
                     <div class="info-box warning">
-                        <p data-lang="en" class="active"><strong>Important:</strong> Copy your API key immediately. You won't be able to see it again after closing the dialog.</p>
+                        <p data-lang="en"><strong>Important:</strong> Copy your API key immediately. You won't be able to see it again after closing the dialog.</p>
                         <p data-lang="zh"><strong>注意：</strong>马上复制你的 API 密钥。关闭对话框后就看不到了！</p>
                         <p data-lang="hi"><strong>ध्यान दो:</strong> API key तुरंत copy कर लो। Dialog बंद करने के बाद दोबारा नहीं दिखेगी!</p>
                         <p data-lang="es"><strong>¡Importante!</strong> Copia tu clave API inmediatamente. No podrás verla después de cerrar el diálogo.</p>
@@ -1730,7 +1710,7 @@ code .</code></pre>
             </div>
 
             <section>
-                <h3 data-lang="en" class="active"><span class="step-number">4</span>Create .env File</h3>
+                <h3 data-lang="en"><span class="step-number">4</span>Create .env File</h3>
                 <h3 data-lang="zh"><span class="step-number">4</span>创建 .env 文件</h3>
                 <h3 data-lang="hi"><span class="step-number">4</span>.env File बनाओ</h3>
                 <h3 data-lang="es"><span class="step-number">4</span>Crear el Archivo .env</h3>
@@ -1738,7 +1718,7 @@ code .</code></pre>
                 <h3 data-lang="ar"><span class="step-number">4</span>إنشاء ملف .env</h3>
                 <h3 data-lang="pt"><span class="step-number">4</span>Criar o Arquivo .env</h3>
 
-                <p data-lang="en" class="active">Create a file named <code>.env</code> in your project root:</p>
+                <p data-lang="en">Create a file named <code>.env</code> in your project root:</p>
                 <p data-lang="zh">在项目根目录创建一个叫 <code>.env</code> 的文件：</p>
                 <p data-lang="hi">Project के root में <code>.env</code> नाम की file बनाओ:</p>
                 <p data-lang="es">Crea un archivo llamado <code>.env</code> en la raíz de tu proyecto:</p>
@@ -1754,7 +1734,7 @@ code .</code></pre>
                     <pre><code>GROQ_API_KEY=your_api_key_here</code></pre>
                 </div>
 
-                <p data-lang="en" class="active">Replace <code>your_api_key_here</code> with your actual Groq API key.</p>
+                <p data-lang="en">Replace <code>your_api_key_here</code> with your actual Groq API key.</p>
                 <p data-lang="zh">把 <code>your_api_key_here</code> 换成你自己的 Groq API 密钥。</p>
                 <p data-lang="hi"><code>your_api_key_here</code> की जगह अपनी असली Groq API key डालो।</p>
                 <p data-lang="es">Reemplaza <code>your_api_key_here</code> con tu clave API de Groq real.</p>
@@ -1763,7 +1743,7 @@ code .</code></pre>
                 <p data-lang="pt">Substitui <code>your_api_key_here</code> pela tua chave API do Groq de verdade.</p>
 
                 <div id="step5">
-                    <h3 data-lang="en" class="active"><span class="step-number">5</span>Create .gitignore</h3>
+                    <h3 data-lang="en"><span class="step-number">5</span>Create .gitignore</h3>
                     <h3 data-lang="zh"><span class="step-number">5</span>创建 .gitignore</h3>
                     <h3 data-lang="hi"><span class="step-number">5</span>.gitignore बनाओ</h3>
                     <h3 data-lang="es"><span class="step-number">5</span>Crear .gitignore</h3>
@@ -1771,7 +1751,7 @@ code .</code></pre>
                     <h3 data-lang="ar"><span class="step-number">5</span>إنشاء .gitignore</h3>
                     <h3 data-lang="pt"><span class="step-number">5</span>Criar .gitignore</h3>
 
-                    <p data-lang="en" class="active">Create a <code>.gitignore</code> file to protect your secrets:</p>
+                    <p data-lang="en">Create a <code>.gitignore</code> file to protect your secrets:</p>
                     <p data-lang="zh">创建一个 <code>.gitignore</code> 文件来保护你的秘密：</p>
                     <p data-lang="hi">अपने secrets को protect करने के लिए <code>.gitignore</code> file बनाओ:</p>
                     <p data-lang="es">Crea un archivo <code>.gitignore</code> para proteger tus secretos:</p>
@@ -1784,18 +1764,28 @@ code .</code></pre>
                             <span class="lang-tag">GITIGNORE</span>
                             <button class="copy-btn" onclick="copyCode(this)">Copy</button>
                         </div>
-                        <pre><code># Python
+                        <pre><code># Python-generated files
 __pycache__/
 *.py[oc]
-.venv/
+build/
+dist/
+wheels/
+*.egg-info
 
-# Secrets
+# Virtual environments
+.venv
+
+# Environment variables (secrets)
 .env
-.env.local</code></pre>
+.env.local
+.env.*.local
+
+# Vector Stores
+chroma_db/</code></pre>
                     </div>
 
                     <div class="info-box warning">
-                        <p data-lang="en" class="active"><strong>Security:</strong> Never commit your <code>.env</code> file to Git. API keys in public repos can be stolen.</p>
+                        <p data-lang="en"><strong>Security:</strong> Never commit your <code>.env</code> file to Git. API keys in public repos can be stolen.</p>
                         <p data-lang="zh"><strong>安全提示：</strong>永远不要把 <code>.env</code> 文件提交到 Git。公开仓库里的 API 密钥会被偷的！</p>
                         <p data-lang="hi"><strong>सावधान:</strong> कभी भी <code>.env</code> file को Git में commit मत करो। Public repos में API keys चोरी हो सकती हैं!</p>
                         <p data-lang="es"><strong>¡Seguridad!</strong> Nunca hagas commit de tu archivo <code>.env</code> en Git. ¡Las claves API en repos públicos pueden ser robadas!</p>
@@ -1806,7 +1796,7 @@ __pycache__/
                 </div>
 
                 <div id="step6">
-                    <h3 data-lang="en" class="active"><span class="step-number">6</span>Install Dependencies</h3>
+                    <h3 data-lang="en"><span class="step-number">6</span>Install Dependencies</h3>
                     <h3 data-lang="zh"><span class="step-number">6</span>安装依赖包</h3>
                     <h3 data-lang="hi"><span class="step-number">6</span>Dependencies Install करो</h3>
                     <h3 data-lang="es"><span class="step-number">6</span>Instalar Dependencias</h3>
@@ -1814,7 +1804,7 @@ __pycache__/
                     <h3 data-lang="ar"><span class="step-number">6</span>تثبيت الاعتماديات</h3>
                     <h3 data-lang="pt"><span class="step-number">6</span>Instalar Dependências</h3>
 
-                    <p data-lang="en" class="active">Run this command to install all required packages:</p>
+                    <p data-lang="en">Run this command to install all required packages:</p>
                     <p data-lang="zh">运行这个命令来安装所有需要的包：</p>
                     <p data-lang="hi">सारे required packages install करने के लिए ये command run करो:</p>
                     <p data-lang="es">Ejecuta este comando para instalar todos los paquetes necesarios:</p>
@@ -1865,7 +1855,7 @@ __pycache__/
                 </div>
 
                 <div id="step7">
-                    <h3 data-lang="en" class="active"><span class="step-number">7</span>Create Data Folder and Add Documents</h3>
+                    <h3 data-lang="en"><span class="step-number">7</span>Create Data Folder and Add Documents</h3>
                     <h3 data-lang="zh"><span class="step-number">7</span>创建数据文件夹并添加文档</h3>
                     <h3 data-lang="hi"><span class="step-number">7</span>Data Folder बनाओ और Documents डालो</h3>
                     <h3 data-lang="es"><span class="step-number">7</span>Crear Carpeta de Datos y Agregar Documentos</h3>
@@ -1897,7 +1887,7 @@ __pycache__/
                         <pre><code>mkdir data</code></pre>
                     </div>
 
-                    <p data-lang="en" class="active">Add these files to the <code>data/</code> folder:</p>
+                    <p data-lang="en">Add these files to the <code>data/</code> folder:</p>
                     <p data-lang="zh">把这些文件加到 <code>data/</code> 文件夹里：</p>
                     <p data-lang="hi">ये files <code>data/</code> folder में डालो:</p>
                     <p data-lang="es">Agrega estos archivos a la carpeta <code>data/</code>:</p>
@@ -1905,7 +1895,7 @@ __pycache__/
                     <p data-lang="ar">ضيف الملفات دي في مجلد <code>data/</code>:</p>
                     <p data-lang="pt">Adiciona esses arquivos na pasta <code>data/</code>:</p>
 
-                    <h4 data-lang="en" class="active">7.1: text_file.txt</h4>
+                    <h4 data-lang="en">7.1: text_file.txt</h4>
                     <h4 data-lang="zh">7.1: text_file.txt</h4>
                     <h4 data-lang="hi">7.1: text_file.txt</h4>
                     <h4 data-lang="es">7.1: text_file.txt</h4>
@@ -1913,7 +1903,7 @@ __pycache__/
                     <h4 data-lang="ar">7.1: text_file.txt</h4>
                     <h4 data-lang="pt">7.1: text_file.txt</h4>
 
-                    <p data-lang="en" class="active">Create a text file with any content you want to query. Example: copy-paste an article about RAG systems or any topic of interest.</p>
+                    <p data-lang="en">Create a text file with any content you want to query. Example: copy-paste an article about RAG systems or any topic of interest.</p>
                     <p data-lang="zh">创建一个文本文件，里面放你想查询的内容。比如：复制粘贴一篇关于 RAG 系统的文章或者任何你感兴趣的话题。</p>
                     <p data-lang="hi">एक text file बनाओ जिसमें जो भी content query करना है वो डालो। जैसे: RAG systems के बारे में कोई article copy-paste कर दो।</p>
                     <p data-lang="es">Crea un archivo de texto con el contenido que quieras consultar. Por ejemplo: copia y pega un artículo sobre sistemas RAG o cualquier tema que te interese.</p>
@@ -1921,7 +1911,7 @@ __pycache__/
                     <p data-lang="ar">أنشئ ملف نصي فيه أي محتوى تبي تسأل عنه. مثلاً: انسخ والصق مقال عن أنظمة RAG أو أي موضوع يعجبك.</p>
                     <p data-lang="pt">Cria um arquivo de texto com qualquer conteúdo que queiras consultar. Exemplo: copia e cola um artigo sobre sistemas RAG ou qualquer assunto que te interesse.</p>
 
-                    <h4 data-lang="en" class="active">7.2: attention.pdf</h4>
+                    <h4 data-lang="en">7.2: attention.pdf</h4>
                     <h4 data-lang="zh">7.2: attention.pdf</h4>
                     <h4 data-lang="hi">7.2: attention.pdf</h4>
                     <h4 data-lang="es">7.2: attention.pdf</h4>
@@ -1929,7 +1919,7 @@ __pycache__/
                     <h4 data-lang="ar">7.2: attention.pdf</h4>
                     <h4 data-lang="pt">7.2: attention.pdf</h4>
 
-                    <p data-lang="en" class="active">Download the famous "Attention Is All You Need" paper (the Transformer paper):</p>
+                    <p data-lang="en">Download the famous "Attention Is All You Need" paper (the Transformer paper):</p>
                     <p data-lang="zh">下载著名的 "Attention Is All You Need" 论文（就是 Transformer 那篇）：</p>
                     <p data-lang="hi">मशहूर "Attention Is All You Need" paper download करो (Transformer वाला paper):</p>
                     <p data-lang="es">Descarga el famoso paper "Attention Is All You Need" (el paper de los Transformers):</p>
@@ -1937,7 +1927,7 @@ __pycache__/
                     <p data-lang="ar">نزّل الورقة البحثية الشهيرة "Attention Is All You Need" (ورقة الـ Transformer):</p>
                     <p data-lang="pt">Baixa o famoso paper "Attention Is All You Need" (o paper dos Transformers):</p>
 
-                    <ul data-lang="en" class="active">
+                    <ul data-lang="en">
                         <li>URL: <a href="https://arxiv.org/pdf/1706.03762" target="_blank">https://arxiv.org/pdf/1706.03762</a></li>
                         <li>Save as: <code>data/attention.pdf</code></li>
                     </ul>
@@ -1966,7 +1956,7 @@ __pycache__/
                         <li>Salvar como: <code>data/attention.pdf</code></li>
                     </ul>
 
-                    <p data-lang="en" class="active">Or use any PDF document you want to query.</p>
+                    <p data-lang="en">Or use any PDF document you want to query.</p>
                     <p data-lang="zh">或者用任何你想查询的 PDF 文档。</p>
                     <p data-lang="hi">या कोई भी PDF document use कर सकते हो जो query करना है।</p>
                     <p data-lang="es">O usa cualquier documento PDF que quieras consultar.</p>
@@ -1974,7 +1964,7 @@ __pycache__/
                     <p data-lang="ar">أو استخدم أي ملف PDF تبي تسأل عنه.</p>
                     <p data-lang="pt">Ou usa qualquer documento PDF que queiras consultar.</p>
 
-                    <h4 data-lang="en" class="active">7.3: Web Document (configured in code)</h4>
+                    <h4 data-lang="en">7.3: Web Document (configured in code)</h4>
                     <h4 data-lang="zh">7.3: 网页文档（在代码中配置）</h4>
                     <h4 data-lang="hi">7.3: Web Document (code में configured है)</h4>
                     <h4 data-lang="es">7.3: Documento Web (configurado en el código)</h4>
@@ -1982,7 +1972,7 @@ __pycache__/
                     <h4 data-lang="ar">7.3: مستند ويب (معد في الكود)</h4>
                     <h4 data-lang="pt">7.3: Documento Web (configurado no código)</h4>
 
-                    <p data-lang="en" class="active">The code loads this blog post about LLM-powered autonomous agents:</p>
+                    <p data-lang="en">The code loads this blog post about LLM-powered autonomous agents:</p>
                     <p data-lang="zh">代码会加载这篇关于 LLM 驱动的自主代理的博客文章：</p>
                     <p data-lang="hi">Code इस blog post को load करता है जो LLM-powered autonomous agents के बारे में है:</p>
                     <p data-lang="es">El código carga esta publicación de blog sobre agentes autónomos con LLM:</p>
@@ -1990,7 +1980,7 @@ __pycache__/
                     <p data-lang="ar">الكود بيحمّل المقال ده عن الوكلاء الذاتيين المدعومين بـ LLM:</p>
                     <p data-lang="pt">O código carrega esse post de blog sobre agentes autônomos com LLM:</p>
 
-                    <ul data-lang="en" class="active">
+                    <ul data-lang="en">
                         <li>URL: <a href="https://lilianweng.github.io/posts/2023-06-23-agent/" target="_blank">https://lilianweng.github.io/posts/2023-06-23-agent/</a></li>
                         <li>To change it, modify the <code>web_paths</code> in <code>main.py</code></li>
                     </ul>
@@ -2049,7 +2039,7 @@ __pycache__/
             </div>
 
             <section>
-                <h3 data-lang="en" class="active"><span class="step-number">8</span>The Complete Code</h3>
+                <h3 data-lang="en"><span class="step-number">8</span>The Complete Code</h3>
                 <h3 data-lang="zh"><span class="step-number">8</span>完整代码</h3>
                 <h3 data-lang="hi"><span class="step-number">8</span>पूरा Code</h3>
                 <h3 data-lang="es"><span class="step-number">8</span>El Código Completo</h3>
@@ -2057,7 +2047,7 @@ __pycache__/
                 <h3 data-lang="ar"><span class="step-number">8</span>الكود الكامل</h3>
                 <h3 data-lang="pt"><span class="step-number">8</span>O Código Completo</h3>
 
-                <p data-lang="en" class="active">Replace the contents of <code>main.py</code> with this complete RAG pipeline:</p>
+                <p data-lang="en">Replace the contents of <code>main.py</code> with this complete RAG pipeline:</p>
                 <p data-lang="zh">把 <code>main.py</code> 的内容替换成这个完整的 RAG 管道代码：</p>
                 <p data-lang="hi"><code>main.py</code> के contents को इस पूरे RAG pipeline से replace करो:</p>
                 <p data-lang="es">Reemplaza el contenido de <code>main.py</code> con este pipeline RAG completo:</p>
@@ -2279,7 +2269,7 @@ os.environ[<span class="string">"USER_AGENT"</span>] = <span class="string">"Moz
                 </div>
 
                 <div id="step9">
-                    <h3 data-lang="en" class="active"><span class="step-number">9</span>Run the Project</h3>
+                    <h3 data-lang="en"><span class="step-number">9</span>Run the Project</h3>
                     <h3 data-lang="zh"><span class="step-number">9</span>运行项目</h3>
                     <h3 data-lang="hi"><span class="step-number">9</span>Project Run करो</h3>
                     <h3 data-lang="es"><span class="step-number">9</span>Ejecutar el Proyecto</h3>
@@ -2312,7 +2302,7 @@ os.environ[<span class="string">"USER_AGENT"</span>] = <span class="string">"Moz
                     </div>
 
                     <div class="info-box success">
-                        <p data-lang="en" class="active"><strong>Note:</strong> First run downloads the embedding model (~90MB). Subsequent runs are faster.</p>
+                        <p data-lang="en"><strong>Note:</strong> First run downloads the embedding model (~90MB). Subsequent runs are faster.</p>
                         <p data-lang="zh"><strong>提示：</strong>第一次运行会下载 embedding 模型（~90MB）。之后运行就快了。</p>
                         <p data-lang="hi"><strong>Note:</strong> पहली बार run करने पर embedding model download होगा (~90MB)। बाद में fast होगा।</p>
                         <p data-lang="es"><strong>Nota:</strong> La primera ejecución descarga el modelo de embeddings (~90MB). Las siguientes serán más rápidas.</p>
@@ -2321,7 +2311,7 @@ os.environ[<span class="string">"USER_AGENT"</span>] = <span class="string">"Moz
                         <p data-lang="pt"><strong>Nota:</strong> A primeira execução baixa o modelo de embeddings (~90MB). As próximas vezes serão mais rápidas.</p>
                     </div>
 
-                    <h4 data-lang="en" class="active">Exit the Program</h4>
+                    <h4 data-lang="en">Exit the Program</h4>
                     <h4 data-lang="zh">退出程序</h4>
                     <h4 data-lang="hi">Program बंद करो</h4>
                     <h4 data-lang="es">Salir del Programa</h4>
@@ -2329,7 +2319,7 @@ os.environ[<span class="string">"USER_AGENT"</span>] = <span class="string">"Moz
                     <h4 data-lang="ar">إنهاء البرنامج</h4>
                     <h4 data-lang="pt">Sair do Programa</h4>
 
-                    <p data-lang="en" class="active">Type <code>quit</code>, <code>exit</code>, or press <code>Ctrl + C</code>.</p>
+                    <p data-lang="en">Type <code>quit</code>, <code>exit</code>, or press <code>Ctrl + C</code>.</p>
                     <p data-lang="zh">输入 <code>quit</code>、<code>exit</code>，或者按 <code>Ctrl + C</code>。</p>
                     <p data-lang="hi"><code>quit</code>, <code>exit</code> type करो, या <code>Ctrl + C</code> दबाओ।</p>
                     <p data-lang="es">Escribe <code>quit</code>, <code>exit</code>, o presiona <code>Ctrl + C</code>.</p>
@@ -2339,7 +2329,7 @@ os.environ[<span class="string">"USER_AGENT"</span>] = <span class="string">"Moz
                 </div>
 
                 <div id="structure">
-                    <h2 data-lang="en" class="active">Project Structure</h2>
+                    <h2 data-lang="en">Project Structure</h2>
                     <h2 data-lang="zh">项目结构</h2>
                     <h2 data-lang="hi">Project Structure</h2>
                     <h2 data-lang="es">Estructura del Proyecto</h2>
@@ -2366,7 +2356,7 @@ os.environ[<span class="string">"USER_AGENT"</span>] = <span class="string">"Moz
 └── uv.lock              # Dependency lock</code></pre>
                     </div>
 
-                    <h4 data-lang="en" class="active">Data Sources</h4>
+                    <h4 data-lang="en">Data Sources</h4>
                     <h4 data-lang="zh">数据来源</h4>
                     <h4 data-lang="hi">Data Sources</h4>
                     <h4 data-lang="es">Fuentes de Datos</h4>
@@ -2386,7 +2376,7 @@ os.environ[<span class="string">"USER_AGENT"</span>] = <span class="string">"Moz
                 </div>
 
                 <div id="troubleshooting">
-                    <h2 data-lang="en" class="active">Troubleshooting</h2>
+                    <h2 data-lang="en">Troubleshooting</h2>
                     <h2 data-lang="zh">故障排除</h2>
                     <h2 data-lang="hi">Problems और Solutions</h2>
                     <h2 data-lang="es">Solución de Problemas</h2>
@@ -2408,7 +2398,7 @@ os.environ[<span class="string">"USER_AGENT"</span>] = <span class="string">"Moz
                         </tbody>
                     </table>
 
-                    <h3 data-lang="en" class="active">Quick Reference Commands</h3>
+                    <h3 data-lang="en">Quick Reference Commands</h3>
                     <h3 data-lang="zh">常用命令速查</h3>
                     <h3 data-lang="hi">Quick Reference Commands</h3>
                     <h3 data-lang="es">Comandos de Referencia Rápida</h3>
@@ -2429,7 +2419,7 @@ os.environ[<span class="string">"USER_AGENT"</span>] = <span class="string">"Moz
                         </tbody>
                     </table>
 
-                    <h3 data-lang="en" class="active">Customization</h3>
+                    <h3 data-lang="en">Customization</h3>
                     <h3 data-lang="zh">自定义设置</h3>
                     <h3 data-lang="hi">Customization</h3>
                     <h3 data-lang="es">Personalización</h3>
@@ -2437,7 +2427,7 @@ os.environ[<span class="string">"USER_AGENT"</span>] = <span class="string">"Moz
                     <h3 data-lang="ar">التخصيص</h3>
                     <h3 data-lang="pt">Personalização</h3>
 
-                    <ul data-lang="en" class="active">
+                    <ul data-lang="en">
                         <li><strong>chunk_size:</strong> Smaller = precise, larger = more context</li>
                         <li><strong>temperature:</strong> 0.0 = factual, 1.0 = creative</li>
                         <li><strong>k:</strong> Number of chunks retrieved (default: 3)</li>
@@ -2503,7 +2493,7 @@ os.environ[<span class="string">"USER_AGENT"</span>] = <span class="string">"Moz
             </div>
 
             <section>
-                <h2 data-lang="en" class="active">Create a GitHub Account</h2>
+                <h2 data-lang="en">Create a GitHub Account</h2>
                 <h2 data-lang="zh">创建 GitHub 账号</h2>
                 <h2 data-lang="hi">GitHub Account बनाओ</h2>
                 <h2 data-lang="es">Crear una Cuenta de GitHub</h2>
@@ -2511,7 +2501,7 @@ os.environ[<span class="string">"USER_AGENT"</span>] = <span class="string">"Moz
                 <h2 data-lang="ar">إنشاء حساب GitHub</h2>
                 <h2 data-lang="pt">Criar uma Conta no GitHub</h2>
 
-                <p data-lang="en" class="active">If you don't have a GitHub account, follow these steps:</p>
+                <p data-lang="en">If you don't have a GitHub account, follow these steps:</p>
                 <p data-lang="zh">如果你还没有 GitHub 账号，按这些步骤来：</p>
                 <p data-lang="hi">अगर GitHub account नहीं है, तो ये steps follow करो:</p>
                 <p data-lang="es">Si no tienes una cuenta de GitHub, sigue estos pasos:</p>
@@ -2519,7 +2509,7 @@ os.environ[<span class="string">"USER_AGENT"</span>] = <span class="string">"Moz
                 <p data-lang="ar">لو ما عندك حساب GitHub، اتبع الخطوات دي:</p>
                 <p data-lang="pt">Se não tens conta no GitHub, segue esses passos:</p>
 
-                <ol data-lang="en" class="active">
+                <ol data-lang="en">
                     <li>Go to <a href="https://github.com" target="_blank">https://github.com</a></li>
                     <li>Click <strong>Sign up</strong></li>
                     <li>Enter your <strong>Gmail address</strong></li>
@@ -2584,7 +2574,7 @@ os.environ[<span class="string">"USER_AGENT"</span>] = <span class="string">"Moz
                 </ol>
 
                 <div class="info-box">
-                    <p data-lang="en" class="active"><strong>Tip:</strong> Choose a professional username - it will appear in all your repository URLs.</p>
+                    <p data-lang="en"><strong>Tip:</strong> Choose a professional username - it will appear in all your repository URLs.</p>
                     <p data-lang="zh"><strong>小提示：</strong>选一个专业的用户名——它会出现在你所有仓库的 URL 里。</p>
                     <p data-lang="hi"><strong>Tip:</strong> Professional username चुनो - यह तुम्हारे सारे repository URLs में दिखेगा।</p>
                     <p data-lang="es"><strong>Consejo:</strong> Elige un nombre de usuario profesional - aparecerá en todas las URLs de tus repositorios.</p>
@@ -2594,7 +2584,7 @@ os.environ[<span class="string">"USER_AGENT"</span>] = <span class="string">"Moz
                 </div>
 
                 <div id="git-install">
-                    <h2 data-lang="en" class="active">Install & Configure Git</h2>
+                    <h2 data-lang="en">Install & Configure Git</h2>
                     <h2 data-lang="zh">安装和配置 Git</h2>
                     <h2 data-lang="hi">Git Install और Configure करो</h2>
                     <h2 data-lang="es">Instalar y Configurar Git</h2>
@@ -2602,7 +2592,7 @@ os.environ[<span class="string">"USER_AGENT"</span>] = <span class="string">"Moz
                     <h2 data-lang="ar">تثبيت وإعداد Git</h2>
                     <h2 data-lang="pt">Instalar e Configurar Git</h2>
 
-                    <h3 data-lang="en" class="active"><span class="step-number">1</span>Install Git</h3>
+                    <h3 data-lang="en"><span class="step-number">1</span>Install Git</h3>
                     <h3 data-lang="zh"><span class="step-number">1</span>安装 Git</h3>
                     <h3 data-lang="hi"><span class="step-number">1</span>Git Install करो</h3>
                     <h3 data-lang="es"><span class="step-number">1</span>Instalar Git</h3>
@@ -2653,7 +2643,7 @@ xcode-select --install
 brew install git</code></pre>
                     </div>
 
-                    <h3 data-lang="en" class="active"><span class="step-number">2</span>Verify Installation</h3>
+                    <h3 data-lang="en"><span class="step-number">2</span>Verify Installation</h3>
                     <h3 data-lang="zh"><span class="step-number">2</span>验证安装</h3>
                     <h3 data-lang="hi"><span class="step-number">2</span>Installation Verify करो</h3>
                     <h3 data-lang="es"><span class="step-number">2</span>Verificar la Instalación</h3>
@@ -2685,7 +2675,7 @@ brew install git</code></pre>
                         <pre><code>git --version</code></pre>
                     </div>
 
-                    <p data-lang="en" class="active">You should see something like: <code>git version 2.43.0</code></p>
+                    <p data-lang="en">You should see something like: <code>git version 2.43.0</code></p>
                     <p data-lang="zh">你应该会看到类似这样的输出：<code>git version 2.43.0</code></p>
                     <p data-lang="hi">कुछ ऐसा दिखना चाहिए: <code>git version 2.43.0</code></p>
                     <p data-lang="es">Deberías ver algo como: <code>git version 2.43.0</code></p>
@@ -2693,7 +2683,7 @@ brew install git</code></pre>
                     <p data-lang="ar">لازم تشوف حاجة زي: <code>git version 2.43.0</code></p>
                     <p data-lang="pt">Deves ver algo tipo: <code>git version 2.43.0</code></p>
 
-                    <h3 data-lang="en" class="active"><span class="step-number">3</span>Configure Git Identity</h3>
+                    <h3 data-lang="en"><span class="step-number">3</span>Configure Git Identity</h3>
                     <h3 data-lang="zh"><span class="step-number">3</span>配置 Git 身份</h3>
                     <h3 data-lang="hi"><span class="step-number">3</span>Git Identity Configure करो</h3>
                     <h3 data-lang="es"><span class="step-number">3</span>Configurar la Identidad de Git</h3>
@@ -2701,7 +2691,7 @@ brew install git</code></pre>
                     <h3 data-lang="ar"><span class="step-number">3</span>إعداد هوية Git</h3>
                     <h3 data-lang="pt"><span class="step-number">3</span>Configurar a Identidade do Git</h3>
 
-                    <p data-lang="en" class="active">Set your name and email (use the same email as your GitHub account):</p>
+                    <p data-lang="en">Set your name and email (use the same email as your GitHub account):</p>
                     <p data-lang="zh">设置你的名字和邮箱（用和 GitHub 账号一样的邮箱）：</p>
                     <p data-lang="hi">अपना name और email set करो (GitHub account वाला ही email use करो):</p>
                     <p data-lang="es">Configura tu nombre y email (usa el mismo email que tu cuenta de GitHub):</p>
@@ -2736,7 +2726,7 @@ git config --global user.email "your.email@gmail.com"</code></pre>
 git config --global user.email "your.email@gmail.com"</code></pre>
                     </div>
 
-                    <p data-lang="en" class="active">Verify your configuration:</p>
+                    <p data-lang="en">Verify your configuration:</p>
                     <p data-lang="zh">验证你的配置：</p>
                     <p data-lang="hi">अपनी configuration verify करो:</p>
                     <p data-lang="es">Verifica tu configuración:</p>
@@ -2770,7 +2760,7 @@ git config --global user.email "your.email@gmail.com"</code></pre>
                 </div>
 
                 <div id="push-repo">
-                    <h2 data-lang="en" class="active">Push Your Project to GitHub</h2>
+                    <h2 data-lang="en">Push Your Project to GitHub</h2>
                     <h2 data-lang="zh">把项目推送到 GitHub</h2>
                     <h2 data-lang="hi">Project को GitHub पर Push करो</h2>
                     <h2 data-lang="es">Subir tu Proyecto a GitHub</h2>
@@ -2779,7 +2769,7 @@ git config --global user.email "your.email@gmail.com"</code></pre>
                     <h2 data-lang="pt">Enviar teu Projeto pro GitHub</h2>
 
                     <div class="info-box warning">
-                        <p data-lang="en" class="active"><strong>Security Check:</strong> Before pushing, ensure your <code>.gitignore</code> file includes <code>.env</code> to prevent exposing your API key!</p>
+                        <p data-lang="en"><strong>Security Check:</strong> Before pushing, ensure your <code>.gitignore</code> file includes <code>.env</code> to prevent exposing your API key!</p>
                         <p data-lang="zh"><strong>安全检查：</strong>推送之前，确保 <code>.gitignore</code> 文件包含 <code>.env</code>，防止暴露你的 API 密钥！</p>
                         <p data-lang="hi"><strong>Security Check:</strong> Push करने से पहले, देखो कि <code>.gitignore</code> में <code>.env</code> है, ताकि API key expose न हो!</p>
                         <p data-lang="es"><strong>¡Control de Seguridad!</strong> Antes de subir, asegúrate de que tu archivo <code>.gitignore</code> incluya <code>.env</code> para no exponer tu clave API!</p>
@@ -2788,7 +2778,7 @@ git config --global user.email "your.email@gmail.com"</code></pre>
                         <p data-lang="pt"><strong>Verificação de Segurança:</strong> Antes de enviar, certifica-te que teu arquivo <code>.gitignore</code> inclui <code>.env</code> pra não expor tua chave API!</p>
                     </div>
 
-                    <h3 data-lang="en" class="active"><span class="step-number">1</span>Create a New Repository on GitHub</h3>
+                    <h3 data-lang="en"><span class="step-number">1</span>Create a New Repository on GitHub</h3>
                     <h3 data-lang="zh"><span class="step-number">1</span>在 GitHub 创建新仓库</h3>
                     <h3 data-lang="hi"><span class="step-number">1</span>GitHub पर New Repository बनाओ</h3>
                     <h3 data-lang="es"><span class="step-number">1</span>Crear un Nuevo Repositorio en GitHub</h3>
@@ -2796,7 +2786,7 @@ git config --global user.email "your.email@gmail.com"</code></pre>
                     <h3 data-lang="ar"><span class="step-number">1</span>إنشاء مستودع جديد على GitHub</h3>
                     <h3 data-lang="pt"><span class="step-number">1</span>Criar um Novo Repositório no GitHub</h3>
 
-                    <ol data-lang="en" class="active">
+                    <ol data-lang="en">
                         <li>Go to <a href="https://github.com/new" target="_blank">https://github.com/new</a></li>
                         <li><strong>Repository name:</strong> <code>langchain-rag</code></li>
                         <li><strong>Description:</strong> "RAG pipeline with LangChain, ChromaDB, and Groq"</li>
@@ -2853,7 +2843,7 @@ git config --global user.email "your.email@gmail.com"</code></pre>
                         <li>Clica em <strong>Create repository</strong></li>
                     </ol>
 
-                    <h3 data-lang="en" class="active"><span class="step-number">2</span>Initialize and Push from Terminal</h3>
+                    <h3 data-lang="en"><span class="step-number">2</span>Initialize and Push from Terminal</h3>
                     <h3 data-lang="zh"><span class="step-number">2</span>从终端初始化并推送</h3>
                     <h3 data-lang="hi"><span class="step-number">2</span>Terminal से Initialize और Push करो</h3>
                     <h3 data-lang="es"><span class="step-number">2</span>Inicializar y Subir desde la Terminal</h3>
@@ -2861,7 +2851,7 @@ git config --global user.email "your.email@gmail.com"</code></pre>
                     <h3 data-lang="ar"><span class="step-number">2</span>التهيئة والرفع من الطرفية</h3>
                     <h3 data-lang="pt"><span class="step-number">2</span>Inicializar e Enviar pelo Terminal</h3>
 
-                    <p data-lang="en" class="active">In VS Code terminal, run these commands (in your project folder):</p>
+                    <p data-lang="en">In VS Code terminal, run these commands (in your project folder):</p>
                     <p data-lang="zh">在 VS Code 终端里，运行这些命令（在你的项目文件夹里）：</p>
                     <p data-lang="hi">VS Code terminal में, ये commands run करो (project folder में):</p>
                     <p data-lang="es">En la terminal de VS Code, ejecuta estos comandos (en tu carpeta del proyecto):</p>
@@ -2942,7 +2932,7 @@ git push -u origin main</code></pre>
                     </div>
 
                     <div class="info-box">
-                        <p data-lang="en" class="active"><strong>First Push:</strong> GitHub will prompt you to authenticate. Sign in with your browser when prompted, or use a Personal Access Token.</p>
+                        <p data-lang="en"><strong>First Push:</strong> GitHub will prompt you to authenticate. Sign in with your browser when prompted, or use a Personal Access Token.</p>
                         <p data-lang="zh"><strong>第一次推送：</strong>GitHub 会让你验证身份。按提示用浏览器登录，或者使用 Personal Access Token。</p>
                         <p data-lang="hi"><strong>First Push:</strong> GitHub authenticate करने को कहेगा। Browser से sign in करो, या Personal Access Token use करो।</p>
                         <p data-lang="es"><strong>Primera Subida:</strong> GitHub te pedirá autenticarte. Inicia sesión con tu navegador cuando te lo pida, o usa un Personal Access Token.</p>
@@ -2951,7 +2941,7 @@ git push -u origin main</code></pre>
                         <p data-lang="pt"><strong>Primeiro Push:</strong> O GitHub vai pedir pra te autenticar. Faz login pelo navegador quando pedir, ou usa um Personal Access Token.</p>
                     </div>
 
-                    <h3 data-lang="en" class="active"><span class="step-number">3</span>Verify Your Push</h3>
+                    <h3 data-lang="en"><span class="step-number">3</span>Verify Your Push</h3>
                     <h3 data-lang="zh"><span class="step-number">3</span>验证你的推送</h3>
                     <h3 data-lang="hi"><span class="step-number">3</span>अपना Push Verify करो</h3>
                     <h3 data-lang="es"><span class="step-number">3</span>Verificar tu Subida</h3>
@@ -2959,7 +2949,7 @@ git push -u origin main</code></pre>
                     <h3 data-lang="ar"><span class="step-number">3</span>تحقق من الرفع</h3>
                     <h3 data-lang="pt"><span class="step-number">3</span>Verificar teu Push</h3>
 
-                    <p data-lang="en" class="active">Go to <code>https://github.com/YOUR_USERNAME/langchain-rag</code> to see your code online!</p>
+                    <p data-lang="en">Go to <code>https://github.com/YOUR_USERNAME/langchain-rag</code> to see your code online!</p>
                     <p data-lang="zh">打开 <code>https://github.com/YOUR_USERNAME/langchain-rag</code> 看看你的代码在线上的样子！</p>
                     <p data-lang="hi"><code>https://github.com/YOUR_USERNAME/langchain-rag</code> पर जाओ और अपना code online देखो!</p>
                     <p data-lang="es">¡Ve a <code>https://github.com/YOUR_USERNAME/langchain-rag</code> para ver tu código en línea!</p>
@@ -2968,7 +2958,7 @@ git push -u origin main</code></pre>
                     <p data-lang="pt">Vai em <code>https://github.com/YOUR_USERNAME/langchain-rag</code> pra ver teu código online!</p>
 
                     <div class="info-box success">
-                        <p data-lang="en" class="active"><strong>Confirm Security:</strong> Check that <code>.env</code> is NOT visible in your GitHub repository. If it is, remove it immediately and regenerate your API key!</p>
+                        <p data-lang="en"><strong>Confirm Security:</strong> Check that <code>.env</code> is NOT visible in your GitHub repository. If it is, remove it immediately and regenerate your API key!</p>
                         <p data-lang="zh"><strong>确认安全：</strong>检查 <code>.env</code> 在你的 GitHub 仓库里不可见。如果可见，马上删除它并重新生成 API 密钥！</p>
                         <p data-lang="hi"><strong>Security Confirm करो:</strong> देखो कि <code>.env</code> तुम्हारे GitHub repository में दिख नहीं रहा। अगर दिख रहा है, तुरंत हटाओ और API key regenerate करो!</p>
                         <p data-lang="es"><strong>¡Confirma la Seguridad!</strong> Verifica que <code>.env</code> NO esté visible en tu repositorio de GitHub. ¡Si lo está, elimínalo inmediatamente y regenera tu clave API!</p>
@@ -2979,7 +2969,7 @@ git push -u origin main</code></pre>
                 </div>
 
                 <div id="git-commands">
-                    <h2 data-lang="en" class="active">Essential Git Commands</h2>
+                    <h2 data-lang="en">Essential Git Commands</h2>
                     <h2 data-lang="zh">Git 必备命令</h2>
                     <h2 data-lang="hi">ज़रूरी Git Commands</h2>
                     <h2 data-lang="es">Comandos Git Esenciales</h2>
@@ -2987,7 +2977,7 @@ git push -u origin main</code></pre>
                     <h2 data-lang="ar">أوامر Git الأساسية</h2>
                     <h2 data-lang="pt">Comandos Git Essenciais</h2>
 
-                    <p data-lang="en" class="active">Reference table for maintaining your project:</p>
+                    <p data-lang="en">Reference table for maintaining your project:</p>
                     <p data-lang="zh">维护项目的参考表：</p>
                     <p data-lang="hi">Project maintain करने के लिए reference table:</p>
                     <p data-lang="es">Tabla de referencia para mantener tu proyecto:</p>
@@ -2995,7 +2985,7 @@ git push -u origin main</code></pre>
                     <p data-lang="ar">جدول مرجعي للحفاظ على مشروعك:</p>
                     <p data-lang="pt">Tabela de referência pra manter teu projeto:</p>
 
-                    <h3 data-lang="en" class="active">Daily Workflow Commands</h3>
+                    <h3 data-lang="en">Daily Workflow Commands</h3>
                     <h3 data-lang="zh">日常工作流命令</h3>
                     <h3 data-lang="hi">Daily Workflow Commands</h3>
                     <h3 data-lang="es">Comandos del Flujo de Trabajo Diario</h3>
@@ -3016,7 +3006,7 @@ git push -u origin main</code></pre>
                         </tbody>
                     </table>
 
-                    <h3 data-lang="en" class="active">Viewing History & Changes</h3>
+                    <h3 data-lang="en">Viewing History & Changes</h3>
                     <h3 data-lang="zh">查看历史和更改</h3>
                     <h3 data-lang="hi">History और Changes देखो</h3>
                     <h3 data-lang="es">Ver Historial y Cambios</h3>
@@ -3035,7 +3025,7 @@ git push -u origin main</code></pre>
                         </tbody>
                     </table>
 
-                    <h3 data-lang="en" class="active">Branching (For Advanced Workflows)</h3>
+                    <h3 data-lang="en">Branching (For Advanced Workflows)</h3>
                     <h3 data-lang="zh">分支（高级工作流）</h3>
                     <h3 data-lang="hi">Branching (Advanced Workflows के लिए)</h3>
                     <h3 data-lang="es">Ramificación (Para Flujos Avanzados)</h3>
@@ -3055,7 +3045,7 @@ git push -u origin main</code></pre>
                         </tbody>
                     </table>
 
-                    <h3 data-lang="en" class="active">Undoing Changes</h3>
+                    <h3 data-lang="en">Undoing Changes</h3>
                     <h3 data-lang="zh">撤销更改</h3>
                     <h3 data-lang="hi">Changes Undo करो</h3>
                     <h3 data-lang="es">Deshacer Cambios</h3>
@@ -3073,7 +3063,7 @@ git push -u origin main</code></pre>
                         </tbody>
                     </table>
 
-                    <h3 data-lang="en" class="active">Typical Update Workflow</h3>
+                    <h3 data-lang="en">Typical Update Workflow</h3>
                     <h3 data-lang="zh">典型的更新工作流</h3>
                     <h3 data-lang="hi">Typical Update Workflow</h3>
                     <h3 data-lang="es">Flujo de Trabajo Típico para Actualizaciones</h3>
@@ -3081,7 +3071,7 @@ git push -u origin main</code></pre>
                     <h3 data-lang="ar">سير العمل النموذجي للتحديث</h3>
                     <h3 data-lang="pt">Workflow Típico de Atualização</h3>
 
-                    <p data-lang="en" class="active">When you make changes to your project:</p>
+                    <p data-lang="en">When you make changes to your project:</p>
                     <p data-lang="zh">当你对项目做了更改：</p>
                     <p data-lang="hi">जब project में changes करो:</p>
                     <p data-lang="es">Cuando hagas cambios en tu proyecto:</p>
@@ -3143,7 +3133,7 @@ git commit -m "Add feature: support for CSV file loading"
 git push</code></pre>
                     </div>
 
-                    <h3 data-lang="en" class="active">Cloning Your Repo on Another Machine</h3>
+                    <h3 data-lang="en">Cloning Your Repo on Another Machine</h3>
                     <h3 data-lang="zh">在另一台机器上克隆你的仓库</h3>
                     <h3 data-lang="hi">दूसरी Machine पर Repo Clone करो</h3>
                     <h3 data-lang="es">Clonar tu Repo en Otra Máquina</h3>
@@ -3179,7 +3169,7 @@ cd langchain-rag</code></pre>
                     </div>
 
                     <div class="info-box warning">
-                        <p data-lang="en" class="active"><strong>Remember:</strong> After cloning, create a new <code>.env</code> file with your API key - it won't be in the repo!</p>
+                        <p data-lang="en"><strong>Remember:</strong> After cloning, create a new <code>.env</code> file with your API key - it won't be in the repo!</p>
                         <p data-lang="zh"><strong>记住：</strong>克隆后，用你的 API 密钥创建一个新的 <code>.env</code> 文件——仓库里没有这个文件！</p>
                         <p data-lang="hi"><strong>याद रखो:</strong> Clone करने के बाद, नई <code>.env</code> file बनाओ अपनी API key के साथ - repo में नहीं होगी!</p>
                         <p data-lang="es"><strong>¡Recuerda!</strong> Después de clonar, crea un nuevo archivo <code>.env</code> con tu clave API - ¡no estará en el repo!</p>
@@ -3188,7 +3178,7 @@ cd langchain-rag</code></pre>
                         <p data-lang="pt"><strong>Lembra:</strong> Depois de clonar, cria um novo arquivo <code>.env</code> com tua chave API - não vai estar no repo!</p>
                     </div>
 
-                    <h3 data-lang="en" class="active">Security Best Practices</h3>
+                    <h3 data-lang="en">Security Best Practices</h3>
                     <h3 data-lang="zh">安全最佳实践</h3>
                     <h3 data-lang="hi">Security Best Practices</h3>
                     <h3 data-lang="es">Mejores Prácticas de Seguridad</h3>
@@ -3196,7 +3186,7 @@ cd langchain-rag</code></pre>
                     <h3 data-lang="ar">أفضل ممارسات الأمان</h3>
                     <h3 data-lang="pt">Melhores Práticas de Segurança</h3>
 
-                    <ul data-lang="en" class="active">
+                    <ul data-lang="en">
                         <li><strong>Never commit secrets:</strong> Always use <code>.gitignore</code> for <code>.env</code>, API keys, passwords</li>
                         <li><strong>Review before pushing:</strong> Run <code>git status</code> and <code>git diff</code> before committing</li>
                         <li><strong>Use meaningful commits:</strong> Write clear messages describing what changed</li>
@@ -3252,8 +3242,6 @@ cd langchain-rag</code></pre>
                 <div class="footer-logo" data-lang="fr">e-LAB LANGCHAIN RAG</div>
                 <div class="footer-logo" data-lang="ar">معمل LangChain RAG الإلكتروني</div>
                 <div class="footer-logo" data-lang="pt">e-LAB LANGCHAIN RAG</div>
-                <div class="footer-logo" data-lang="ur">LangChain RAG ای-لیب</div>
-                <div class="footer-logo" data-lang="ur-roman">LANGCHAIN RAG e-LAB</div>
 
                 <p data-lang="en">Built with LangChain, ChromaDB, HuggingFace, and Groq</p>
                 <p data-lang="zh">使用 LangChain、ChromaDB、HuggingFace 和 Groq 构建</p>
@@ -3262,11 +3250,9 @@ cd langchain-rag</code></pre>
                 <p data-lang="fr">Construit avec LangChain, ChromaDB, HuggingFace et Groq</p>
                 <p data-lang="ar">مبني بـ LangChain، ChromaDB، HuggingFace، و Groq</p>
                 <p data-lang="pt">Construído com LangChain, ChromaDB, HuggingFace e Groq</p>
-                <p data-lang="ur">LangChain، ChromaDB، HuggingFace، اور Groq سے بنایا گیا</p>
-                <p data-lang="ur-roman">LangChain, ChromaDB, HuggingFace, aur Groq se banaya gaya</p>
 
                 <div class="copyright" data-lang="en">
-                    Prepared by: Salman Zaman for the ambitious Software Development Orchestrators/Architects!
+                    Prepared by: Salman Zaman for the ambitious Software Orchestrators / Architects!
                 </div>
                 <div class="copyright" data-lang="zh">
                     由 Salman Zaman 为有志向的软件开发协调员/架构师准备！
@@ -3286,12 +3272,6 @@ cd langchain-rag</code></pre>
                 <div class="copyright" data-lang="pt">
                     Preparado por: Salman Zaman para os ambiciosos Orquestradores/Arquitetos de Desenvolvimento de Software!
                 </div>
-                <div class="copyright" data-lang="ur">
-                    تیار کردہ: سلمان زمان - پرعزم سافٹ ویئر ڈیولپمنٹ آرکیٹیکٹس کے لیے!
-                </div>
-                <div class="copyright" data-lang="ur-roman">
-                    Tayyar karda: Salman Zaman - Software Development Architects ke liye!
-                </div>
             </div>
         </footer>
 
@@ -3306,9 +3286,7 @@ cd langchain-rag</code></pre>
             'es': { name: 'Spanish', rtl: false },
             'fr': { name: 'French', rtl: false },
             'pt': { name: 'Portuguese', rtl: false },
-            'ar': { name: 'Arabic', rtl: true },
-            'ur': { name: 'Urdu', rtl: true },
-            'ur-roman': { name: 'Roman Urdu', rtl: false }
+            'ar': { name: 'Arabic', rtl: true }
         };
 
         let currentLanguage = localStorage.getItem('preferredLanguage') || 'en';
@@ -3352,7 +3330,7 @@ cd langchain-rag</code></pre>
 
             const config = languageConfig[language] || languageConfig['en'];
 
-            // Set RTL direction for Arabic and Urdu
+            // Set RTL direction for Arabic
             if (config.rtl) {
                 document.documentElement.setAttribute('dir', 'rtl');
                 document.documentElement.setAttribute('lang', language);
@@ -3361,32 +3339,30 @@ cd langchain-rag</code></pre>
                 document.documentElement.setAttribute('lang', language);
             }
 
-            // For Urdu variants, fall back to existing content or show English
-            let displayLang = language;
-            if (language === 'ur' || language === 'ur-roman') {
-                // Check if Urdu content exists, otherwise fall back to English
-                const testElement = document.querySelector(`[data-lang="${language}"]`);
-                if (!testElement) {
-                    displayLang = 'en'; // Fallback to English if Urdu not available
-                }
-            }
+            // Group elements by their parent to handle fallback properly
+            const elementsByParent = new Map();
 
-            // Update all content sections
             document.querySelectorAll('[data-lang]').forEach(element => {
-                // Don't touch nav-link current highlighting
-                if (element.classList.contains('nav-link') && element.classList.contains('current')) {
-                    element.style.display = '';
-                    if (element.getAttribute('data-lang') === displayLang) {
-                        element.classList.add('active');
-                    } else {
-                        element.classList.remove('active');
-                    }
-                } else {
+                const parent = element.parentElement;
+                const key = parent ? parent : 'root';
+                if (!elementsByParent.has(key)) {
+                    elementsByParent.set(key, []);
+                }
+                elementsByParent.get(key).push(element);
+            });
+
+            // For each parent group, show the selected language OR fallback to English
+            elementsByParent.forEach((elements, parent) => {
+                // Check if selected language exists in this group
+                const hasSelectedLang = elements.some(el => el.getAttribute('data-lang') === language);
+                const displayLang = hasSelectedLang ? language : 'en';
+
+                elements.forEach(element => {
                     element.classList.remove('active');
                     if (element.getAttribute('data-lang') === displayLang) {
                         element.classList.add('active');
                     }
-                }
+                });
             });
         }
 

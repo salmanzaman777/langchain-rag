@@ -16,3 +16,6 @@ wheels/
 
 # Vector Stores
 chroma_db/
+
+# Claude-related files
+.claude/
