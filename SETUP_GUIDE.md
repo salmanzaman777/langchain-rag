@@ -132,7 +132,7 @@ Run this command to install all required packages:
 
 **All Platforms:**
 ```bash
-uv add langchain langchain-groq langchain-community langchain-text-splitters langchain-huggingface langchain-chroma pypdf beautifulsoup4 lxml python-dotenv
+uv add langchain langchain-groq langchain-community langchain-text-splitters langchain-huggingface langchain-chroma pypdf beautifulsoup4 lxml python-dotenv sentence-transformers chromadb langchain-core
 ```
 
 | Package | Purpose |
@@ -146,6 +146,9 @@ uv add langchain langchain-groq langchain-community langchain-text-splitters lan
 | `pypdf` | PDF reading |
 | `beautifulsoup4`, `lxml` | Web scraping |
 | `python-dotenv` | Load .env file |
+| `sentence-transformers` | Embedding models |
+| `chromadb` | Vector database core |
+| `langchain-core` | Base abstractions |
 
 ---
 
@@ -715,6 +718,7 @@ cd langchain-rag
 | Problem | Solution |
 |---------|----------|
 | `uv is not recognized` | Restart terminal or reinstall uv |
+| `running scripts is disabled` (PowerShell) | Run: `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser` |
 | `No module named X` | Run `uv add <package-name>` |
 | `GROQ_API_KEY not found` | Check `.env` file exists with correct format |
 | `API key invalid` | Get new key from https://console.groq.com/keys |

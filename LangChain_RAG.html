@@ -382,8 +382,8 @@
         h2 { font-size: 1.8rem; margin: 3rem 0 1.5rem; color: #1e293b; letter-spacing: -0.5px; }
         h3 { font-size: 1.4rem; margin: 2rem 0 1rem; color: #334155; }
         h4 { font-size: 1.1rem; margin: 1.5rem 0 0.75rem; color: #475569; }
-        p { margin-bottom: 1.25rem; font-size: 0.84rem; color: #475569; }
-        ul, ol { margin-bottom: 1.25rem; padding-left: 1.5rem; color: #475569; font-size: 0.84rem; }
+        p { margin-bottom: 1.25rem; font-size: 0.97rem; color: #475569; }
+        ul, ol { margin-bottom: 1.25rem; padding-left: 1.5rem; color: #475569; font-size: 0.97rem; }
         li { margin-bottom: 0.5rem; }
         code { background: linear-gradient(135deg, #e0f2fe, #f0f9ff); padding: 3px 8px; border-radius: 4px; font-size: 0.85rem; color: #0369a1; font-weight: 500; border: 1px solid #bae6fd; }
 
@@ -558,6 +558,30 @@
         }
         .code-container[data-platform].active {
             display: block;
+        }
+
+        /* Code containers with BOTH platform AND language attributes need both to match */
+        .code-container[data-platform][data-lang] {
+            display: none;
+        }
+        .code-container[data-platform][data-lang].active.active-lang {
+            display: block;
+        }
+
+        /* Platform-specific inline commands (Prerequisites, Troubleshooting) */
+        .uv-install-cmd[data-platform] {
+            display: none;
+        }
+        .uv-install-cmd[data-platform].active {
+            display: inline;
+        }
+
+        /* Platform-specific troubleshooting rows */
+        .troubleshoot-row[data-platform] {
+            display: none;
+        }
+        .troubleshoot-row[data-platform].active {
+            display: table-row;
         }
 
         .code-container .platform-badge {
@@ -1472,45 +1496,612 @@
                 <ul data-lang="en">
                     <li><strong>Windows 10/11</strong> (or macOS/Linux with minor adjustments)</li>
                     <li><strong>VS Code</strong> installed</li>
-                    <li><strong>uv</strong> installed - <a href="https://docs.astral.sh/uv/getting-started/installation/" target="_blank">Install Guide</a><br><code style="font-size: 0.85em; background: #1e1e1e; padding: 2px 6px; border-radius: 3px;">PowerShell: powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"</code></li>
+                    <li><strong>uv</strong> installed - <a href="https://docs.astral.sh/uv/getting-started/installation/" target="_blank">Install Guide</a></li>
                     <li><strong>Groq API Key</strong> (free at <a href="https://console.groq.com" target="_blank">console.groq.com</a>)</li>
                 </ul>
+
+                <p data-lang="en" style="margin-top: 1rem; font-size: 0.9rem; color: #64748b;"><strong>Already have these?</strong> Verify with these commands (if you see version numbers, you're good to go!):</p>
+                <div class="code-container" data-platform="powershell" data-lang="en">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge powershell">Windows (CMD / PowerShell)</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code><span class="comment"># Check VS Code</span>
+code --version
+
+<span class="comment"># Check uv</span>
+uv --version</code></pre>
+                </div>
+                <div class="code-container" data-platform="bash" data-lang="en">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge bash">Bash / Git Bash / Linux</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code><span class="comment"># Check VS Code</span>
+code --version
+
+<span class="comment"># Check uv</span>
+uv --version</code></pre>
+                </div>
+                <div class="code-container" data-platform="macos" data-lang="en">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge macos">macOS</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code><span class="comment"># Check VS Code</span>
+code --version
+
+<span class="comment"># Check uv</span>
+uv --version</code></pre>
+                </div>
+
+                <p data-lang="en" style="margin-top: 1.5rem; font-size: 0.9rem; color: #64748b;"><strong>Need to install uv?</strong> Run this one-line installer, then restart your terminal:</p>
+                <div class="code-container" data-platform="powershell" data-lang="en">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge powershell">Windows (CMD / PowerShell)</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"</code></pre>
+                </div>
+                <div class="code-container" data-platform="bash" data-lang="en">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge bash">Bash / Git Bash / Linux</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>curl -LsSf https://astral.sh/uv/install.sh | sh</code></pre>
+                </div>
+                <div class="code-container" data-platform="macos" data-lang="en">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge macos">macOS</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>curl -LsSf https://astral.sh/uv/install.sh | sh</code></pre>
+                </div>
+
+                <p data-lang="en" style="margin-top: 1rem; font-size: 0.9rem; color: #64748b;"><strong>Verify installation:</strong> After restarting your terminal, confirm uv is installed:</p>
+                <div class="code-container" data-platform="powershell" data-lang="en">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge powershell">Windows (CMD / PowerShell)</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>uv --version</code></pre>
+                </div>
+                <div class="code-container" data-platform="bash" data-lang="en">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge bash">Bash / Git Bash / Linux</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>uv --version</code></pre>
+                </div>
+                <div class="code-container" data-platform="macos" data-lang="en">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge macos">macOS</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>uv --version</code></pre>
+                </div>
                 <ul data-lang="zh">
                     <li><strong>Windows 10/11</strong>（macOS/Linux 也行，稍微调整一下）</li>
                     <li><strong>VS Code</strong> 已安装</li>
-                    <li><strong>uv</strong> 已安装 - <a href="https://docs.astral.sh/uv/getting-started/installation/" target="_blank">安装指南</a><br><code style="font-size: 0.85em; background: #1e1e1e; padding: 2px 6px; border-radius: 3px;">PowerShell: powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"</code></li>
+                    <li><strong>uv</strong> 已安装 - <a href="https://docs.astral.sh/uv/getting-started/installation/" target="_blank">安装指南</a></li>
                     <li><strong>Groq API Key</strong>（免费的，去 <a href="https://console.groq.com" target="_blank">console.groq.com</a> 注册）</li>
                 </ul>
+
+                <p data-lang="zh" style="margin-top: 1rem; font-size: 0.9rem; color: #64748b;"><strong>已经安装了？</strong> 用这些命令验证（如果显示版本号，就说明已经装好了！）：</p>
+                <div class="code-container" data-platform="powershell" data-lang="zh">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge powershell">Windows (CMD / PowerShell)</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code><span class="comment"># 检查 VS Code</span>
+code --version
+
+<span class="comment"># 检查 uv</span>
+uv --version</code></pre>
+                </div>
+                <div class="code-container" data-platform="bash" data-lang="zh">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge bash">Bash / Git Bash / Linux</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code><span class="comment"># 检查 VS Code</span>
+code --version
+
+<span class="comment"># 检查 uv</span>
+uv --version</code></pre>
+                </div>
+                <div class="code-container" data-platform="macos" data-lang="zh">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge macos">macOS</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code><span class="comment"># 检查 VS Code</span>
+code --version
+
+<span class="comment"># 检查 uv</span>
+uv --version</code></pre>
+                </div>
+
+                <p data-lang="zh" style="margin-top: 1.5rem; font-size: 0.9rem; color: #64748b;"><strong>需要安装 uv？</strong> 运行这个一键安装命令，然后重启终端：</p>
+                <div class="code-container" data-platform="powershell" data-lang="zh">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge powershell">Windows (CMD / PowerShell)</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"</code></pre>
+                </div>
+                <div class="code-container" data-platform="bash" data-lang="zh">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge bash">Bash / Git Bash / Linux</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>curl -LsSf https://astral.sh/uv/install.sh | sh</code></pre>
+                </div>
+                <div class="code-container" data-platform="macos" data-lang="zh">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge macos">macOS</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>curl -LsSf https://astral.sh/uv/install.sh | sh</code></pre>
+                </div>
+
+                <p data-lang="zh" style="margin-top: 1rem; font-size: 0.9rem; color: #64748b;"><strong>验证安装：</strong> 重启终端后，确认 uv 已安装：</p>
+                <div class="code-container" data-platform="powershell" data-lang="zh">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge powershell">Windows (CMD / PowerShell)</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>uv --version</code></pre>
+                </div>
+                <div class="code-container" data-platform="bash" data-lang="zh">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge bash">Bash / Git Bash / Linux</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>uv --version</code></pre>
+                </div>
+                <div class="code-container" data-platform="macos" data-lang="zh">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge macos">macOS</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>uv --version</code></pre>
+                </div>
                 <ul data-lang="hi">
                     <li><strong>Windows 10/11</strong> (macOS/Linux भी चलेगा, थोड़ा adjust करना होगा)</li>
                     <li><strong>VS Code</strong> installed होना चाहिए</li>
-                    <li><strong>uv</strong> installed - <a href="https://docs.astral.sh/uv/getting-started/installation/" target="_blank">Install Guide</a><br><code style="font-size: 0.85em; background: #1e1e1e; padding: 2px 6px; border-radius: 3px;">PowerShell: powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"</code></li>
+                    <li><strong>uv</strong> installed - <a href="https://docs.astral.sh/uv/getting-started/installation/" target="_blank">Install Guide</a></li>
                     <li><strong>Groq API Key</strong> (फ्री है! <a href="https://console.groq.com" target="_blank">console.groq.com</a> पर जाओ)</li>
                 </ul>
+
+                <p data-lang="hi" style="margin-top: 1rem; font-size: 0.9rem; color: #64748b;"><strong>पहले से installed है?</strong> इन commands से verify करो (अगर version number दिखे, तो सब सही है!):</p>
+                <div class="code-container" data-platform="powershell" data-lang="hi">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge powershell">Windows (CMD / PowerShell)</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code><span class="comment"># VS Code check करो</span>
+code --version
+
+<span class="comment"># uv check करो</span>
+uv --version</code></pre>
+                </div>
+                <div class="code-container" data-platform="bash" data-lang="hi">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge bash">Bash / Git Bash / Linux</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code><span class="comment"># VS Code check करो</span>
+code --version
+
+<span class="comment"># uv check करो</span>
+uv --version</code></pre>
+                </div>
+                <div class="code-container" data-platform="macos" data-lang="hi">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge macos">macOS</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code><span class="comment"># VS Code check करो</span>
+code --version
+
+<span class="comment"># uv check करो</span>
+uv --version</code></pre>
+                </div>
+
+                <p data-lang="hi" style="margin-top: 1.5rem; font-size: 0.9rem; color: #64748b;"><strong>uv install करना है?</strong> ये one-line installer run करो, फिर terminal restart करो:</p>
+                <div class="code-container" data-platform="powershell" data-lang="hi">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge powershell">Windows (CMD / PowerShell)</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"</code></pre>
+                </div>
+                <div class="code-container" data-platform="bash" data-lang="hi">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge bash">Bash / Git Bash / Linux</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>curl -LsSf https://astral.sh/uv/install.sh | sh</code></pre>
+                </div>
+                <div class="code-container" data-platform="macos" data-lang="hi">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge macos">macOS</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>curl -LsSf https://astral.sh/uv/install.sh | sh</code></pre>
+                </div>
+
+                <p data-lang="hi" style="margin-top: 1rem; font-size: 0.9rem; color: #64748b;"><strong>Installation verify करो:</strong> Terminal restart करने के बाद, confirm करो कि uv install हो गया:</p>
+                <div class="code-container" data-platform="powershell" data-lang="hi">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge powershell">Windows (CMD / PowerShell)</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>uv --version</code></pre>
+                </div>
+                <div class="code-container" data-platform="bash" data-lang="hi">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge bash">Bash / Git Bash / Linux</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>uv --version</code></pre>
+                </div>
+                <div class="code-container" data-platform="macos" data-lang="hi">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge macos">macOS</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>uv --version</code></pre>
+                </div>
                 <ul data-lang="es">
                     <li><strong>Windows 10/11</strong> (o macOS/Linux con pequeños ajustes)</li>
                     <li><strong>VS Code</strong> instalado</li>
-                    <li><strong>uv</strong> instalado - <a href="https://docs.astral.sh/uv/getting-started/installation/" target="_blank">Guía de Instalación</a><br><code style="font-size: 0.85em; background: #1e1e1e; padding: 2px 6px; border-radius: 3px;">PowerShell: powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"</code></li>
+                    <li><strong>uv</strong> instalado - <a href="https://docs.astral.sh/uv/getting-started/installation/" target="_blank">Guía de Instalación</a></li>
                     <li><strong>Groq API Key</strong> (¡es gratis! en <a href="https://console.groq.com" target="_blank">console.groq.com</a>)</li>
                 </ul>
+
+                <p data-lang="es" style="margin-top: 1rem; font-size: 0.9rem; color: #64748b;"><strong>¿Ya los tienes instalados?</strong> Verifica con estos comandos (si ves números de versión, ¡todo bien!):</p>
+                <div class="code-container" data-platform="powershell" data-lang="es">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge powershell">Windows (CMD / PowerShell)</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code><span class="comment"># Verificar VS Code</span>
+code --version
+
+<span class="comment"># Verificar uv</span>
+uv --version</code></pre>
+                </div>
+                <div class="code-container" data-platform="bash" data-lang="es">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge bash">Bash / Git Bash / Linux</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code><span class="comment"># Verificar VS Code</span>
+code --version
+
+<span class="comment"># Verificar uv</span>
+uv --version</code></pre>
+                </div>
+                <div class="code-container" data-platform="macos" data-lang="es">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge macos">macOS</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code><span class="comment"># Verificar VS Code</span>
+code --version
+
+<span class="comment"># Verificar uv</span>
+uv --version</code></pre>
+                </div>
+
+                <p data-lang="es" style="margin-top: 1.5rem; font-size: 0.9rem; color: #64748b;"><strong>¿Necesitas instalar uv?</strong> Ejecuta este instalador de una línea, luego reinicia tu terminal:</p>
+                <div class="code-container" data-platform="powershell" data-lang="es">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge powershell">Windows (CMD / PowerShell)</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"</code></pre>
+                </div>
+                <div class="code-container" data-platform="bash" data-lang="es">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge bash">Bash / Git Bash / Linux</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>curl -LsSf https://astral.sh/uv/install.sh | sh</code></pre>
+                </div>
+                <div class="code-container" data-platform="macos" data-lang="es">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge macos">macOS</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>curl -LsSf https://astral.sh/uv/install.sh | sh</code></pre>
+                </div>
+
+                <p data-lang="es" style="margin-top: 1rem; font-size: 0.9rem; color: #64748b;"><strong>Verificar instalación:</strong> Después de reiniciar tu terminal, confirma que uv está instalado:</p>
+                <div class="code-container" data-platform="powershell" data-lang="es">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge powershell">Windows (CMD / PowerShell)</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>uv --version</code></pre>
+                </div>
+                <div class="code-container" data-platform="bash" data-lang="es">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge bash">Bash / Git Bash / Linux</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>uv --version</code></pre>
+                </div>
+                <div class="code-container" data-platform="macos" data-lang="es">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge macos">macOS</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>uv --version</code></pre>
+                </div>
                 <ul data-lang="fr">
                     <li><strong>Windows 10/11</strong> (ou macOS/Linux avec quelques ajustements)</li>
                     <li><strong>VS Code</strong> installé</li>
-                    <li><strong>uv</strong> installé - <a href="https://docs.astral.sh/uv/getting-started/installation/" target="_blank">Guide d'Installation</a><br><code style="font-size: 0.85em; background: #1e1e1e; padding: 2px 6px; border-radius: 3px;">PowerShell: powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"</code></li>
+                    <li><strong>uv</strong> installé - <a href="https://docs.astral.sh/uv/getting-started/installation/" target="_blank">Guide d'Installation</a></li>
                     <li><strong>Groq API Key</strong> (c'est gratuit ! sur <a href="https://console.groq.com" target="_blank">console.groq.com</a>)</li>
                 </ul>
+
+                <p data-lang="fr" style="margin-top: 1rem; font-size: 0.9rem; color: #64748b;"><strong>Tu les as déjà ?</strong> Vérifie avec ces commandes (si tu vois des numéros de version, c'est bon !) :</p>
+                <div class="code-container" data-platform="powershell" data-lang="fr">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge powershell">Windows (CMD / PowerShell)</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code><span class="comment"># Vérifier VS Code</span>
+code --version
+
+<span class="comment"># Vérifier uv</span>
+uv --version</code></pre>
+                </div>
+                <div class="code-container" data-platform="bash" data-lang="fr">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge bash">Bash / Git Bash / Linux</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code><span class="comment"># Vérifier VS Code</span>
+code --version
+
+<span class="comment"># Vérifier uv</span>
+uv --version</code></pre>
+                </div>
+                <div class="code-container" data-platform="macos" data-lang="fr">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge macos">macOS</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code><span class="comment"># Vérifier VS Code</span>
+code --version
+
+<span class="comment"># Vérifier uv</span>
+uv --version</code></pre>
+                </div>
+
+                <p data-lang="fr" style="margin-top: 1.5rem; font-size: 0.9rem; color: #64748b;"><strong>Besoin d'installer uv ?</strong> Exécute cet installateur en une ligne, puis redémarre ton terminal :</p>
+                <div class="code-container" data-platform="powershell" data-lang="fr">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge powershell">Windows (CMD / PowerShell)</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"</code></pre>
+                </div>
+                <div class="code-container" data-platform="bash" data-lang="fr">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge bash">Bash / Git Bash / Linux</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>curl -LsSf https://astral.sh/uv/install.sh | sh</code></pre>
+                </div>
+                <div class="code-container" data-platform="macos" data-lang="fr">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge macos">macOS</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>curl -LsSf https://astral.sh/uv/install.sh | sh</code></pre>
+                </div>
+
+                <p data-lang="fr" style="margin-top: 1rem; font-size: 0.9rem; color: #64748b;"><strong>Vérifier l'installation :</strong> Après avoir redémarré ton terminal, confirme que uv est installé :</p>
+                <div class="code-container" data-platform="powershell" data-lang="fr">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge powershell">Windows (CMD / PowerShell)</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>uv --version</code></pre>
+                </div>
+                <div class="code-container" data-platform="bash" data-lang="fr">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge bash">Bash / Git Bash / Linux</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>uv --version</code></pre>
+                </div>
+                <div class="code-container" data-platform="macos" data-lang="fr">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge macos">macOS</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>uv --version</code></pre>
+                </div>
                 <ul data-lang="ar">
                     <li><strong>Windows 10/11</strong> (أو macOS/Linux مع تعديلات بسيطة)</li>
                     <li><strong>VS Code</strong> مثبت</li>
-                    <li><strong>uv</strong> مثبت - <a href="https://docs.astral.sh/uv/getting-started/installation/" target="_blank">دليل التثبيت</a><br><code style="font-size: 0.85em; background: #1e1e1e; padding: 2px 6px; border-radius: 3px;">PowerShell: powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"</code></li>
+                    <li><strong>uv</strong> مثبت - <a href="https://docs.astral.sh/uv/getting-started/installation/" target="_blank">دليل التثبيت</a></li>
                     <li><strong>Groq API Key</strong> (مجاني! من <a href="https://console.groq.com" target="_blank">console.groq.com</a>)</li>
                 </ul>
+
+                <p data-lang="ar" style="margin-top: 1rem; font-size: 0.9rem; color: #64748b;"><strong>عندك هذه مثبتة؟</strong> تحقق بهذه الأوامر (إذا شفت أرقام الإصدار، كل شيء تمام!):</p>
+                <div class="code-container" data-platform="powershell" data-lang="ar">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge powershell">Windows (CMD / PowerShell)</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code><span class="comment"># تحقق من VS Code</span>
+code --version
+
+<span class="comment"># تحقق من uv</span>
+uv --version</code></pre>
+                </div>
+                <div class="code-container" data-platform="bash" data-lang="ar">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge bash">Bash / Git Bash / Linux</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code><span class="comment"># تحقق من VS Code</span>
+code --version
+
+<span class="comment"># تحقق من uv</span>
+uv --version</code></pre>
+                </div>
+                <div class="code-container" data-platform="macos" data-lang="ar">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge macos">macOS</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code><span class="comment"># تحقق من VS Code</span>
+code --version
+
+<span class="comment"># تحقق من uv</span>
+uv --version</code></pre>
+                </div>
+
+                <p data-lang="ar" style="margin-top: 1.5rem; font-size: 0.9rem; color: #64748b;"><strong>تحتاج تثبيت uv؟</strong> شغّل أمر التثبيت هذا، ثم أعد تشغيل الطرفية:</p>
+                <div class="code-container" data-platform="powershell" data-lang="ar">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge powershell">Windows (CMD / PowerShell)</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"</code></pre>
+                </div>
+                <div class="code-container" data-platform="bash" data-lang="ar">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge bash">Bash / Git Bash / Linux</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>curl -LsSf https://astral.sh/uv/install.sh | sh</code></pre>
+                </div>
+                <div class="code-container" data-platform="macos" data-lang="ar">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge macos">macOS</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>curl -LsSf https://astral.sh/uv/install.sh | sh</code></pre>
+                </div>
+
+                <p data-lang="ar" style="margin-top: 1rem; font-size: 0.9rem; color: #64748b;"><strong>تحقق من التثبيت:</strong> بعد إعادة تشغيل الطرفية، تأكد إن uv مثبت:</p>
+                <div class="code-container" data-platform="powershell" data-lang="ar">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge powershell">Windows (CMD / PowerShell)</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>uv --version</code></pre>
+                </div>
+                <div class="code-container" data-platform="bash" data-lang="ar">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge bash">Bash / Git Bash / Linux</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>uv --version</code></pre>
+                </div>
+                <div class="code-container" data-platform="macos" data-lang="ar">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge macos">macOS</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>uv --version</code></pre>
+                </div>
                 <ul data-lang="pt">
                     <li><strong>Windows 10/11</strong> (ou macOS/Linux com pequenos ajustes)</li>
                     <li><strong>VS Code</strong> instalado</li>
-                    <li><strong>uv</strong> instalado - <a href="https://docs.astral.sh/uv/getting-started/installation/" target="_blank">Guia de Instalação</a><br><code style="font-size: 0.85em; background: #1e1e1e; padding: 2px 6px; border-radius: 3px;">PowerShell: powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"</code></li>
+                    <li><strong>uv</strong> instalado - <a href="https://docs.astral.sh/uv/getting-started/installation/" target="_blank">Guia de Instalação</a></li>
                     <li><strong>Groq API Key</strong> (é de graça! em <a href="https://console.groq.com" target="_blank">console.groq.com</a>)</li>
                 </ul>
+
+                <p data-lang="pt" style="margin-top: 1rem; font-size: 0.9rem; color: #64748b;"><strong>Já tens estes instalados?</strong> Verifica com estes comandos (se vires números de versão, está tudo bem!):</p>
+                <div class="code-container" data-platform="powershell" data-lang="pt">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge powershell">Windows (CMD / PowerShell)</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code><span class="comment"># Verificar VS Code</span>
+code --version
+
+<span class="comment"># Verificar uv</span>
+uv --version</code></pre>
+                </div>
+                <div class="code-container" data-platform="bash" data-lang="pt">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge bash">Bash / Git Bash / Linux</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code><span class="comment"># Verificar VS Code</span>
+code --version
+
+<span class="comment"># Verificar uv</span>
+uv --version</code></pre>
+                </div>
+                <div class="code-container" data-platform="macos" data-lang="pt">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge macos">macOS</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code><span class="comment"># Verificar VS Code</span>
+code --version
+
+<span class="comment"># Verificar uv</span>
+uv --version</code></pre>
+                </div>
+
+                <p data-lang="pt" style="margin-top: 1.5rem; font-size: 0.9rem; color: #64748b;"><strong>Precisas instalar uv?</strong> Executa este instalador de uma linha, depois reinicia o terminal:</p>
+                <div class="code-container" data-platform="powershell" data-lang="pt">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge powershell">Windows (CMD / PowerShell)</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"</code></pre>
+                </div>
+                <div class="code-container" data-platform="bash" data-lang="pt">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge bash">Bash / Git Bash / Linux</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>curl -LsSf https://astral.sh/uv/install.sh | sh</code></pre>
+                </div>
+                <div class="code-container" data-platform="macos" data-lang="pt">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge macos">macOS</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>curl -LsSf https://astral.sh/uv/install.sh | sh</code></pre>
+                </div>
+
+                <p data-lang="pt" style="margin-top: 1rem; font-size: 0.9rem; color: #64748b;"><strong>Verificar instalação:</strong> Depois de reiniciar o terminal, confirma que uv está instalado:</p>
+                <div class="code-container" data-platform="powershell" data-lang="pt">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge powershell">Windows (CMD / PowerShell)</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>uv --version</code></pre>
+                </div>
+                <div class="code-container" data-platform="bash" data-lang="pt">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge bash">Bash / Git Bash / Linux</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>uv --version</code></pre>
+                </div>
+                <div class="code-container" data-platform="macos" data-lang="pt">
+                    <div class="code-header">
+                        <span class="lang-tag"><span class="platform-badge macos">macOS</span></span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>uv --version</code></pre>
+                </div>
 
                 <div id="step1">
                     <h3 data-lang="en"><span class="step-number">1</span>Create Project Folder</h3>
@@ -1817,7 +2408,7 @@ chroma_db/</code></pre>
                             <span class="lang-tag"><span class="platform-badge powershell">Windows (CMD / PowerShell)</span></span>
                             <button class="copy-btn" onclick="copyCode(this)">Copy</button>
                         </div>
-                        <pre><code>uv add langchain langchain-groq langchain-community langchain-text-splitters langchain-huggingface langchain-chroma pypdf beautifulsoup4 lxml python-dotenv sentence-transformers</code></pre>
+                        <pre><code>uv add langchain langchain-groq langchain-community langchain-text-splitters langchain-huggingface langchain-chroma pypdf beautifulsoup4 lxml python-dotenv sentence-transformers chromadb langchain-core</code></pre>
                     </div>
 
                     <div class="code-container" data-platform="bash">
@@ -1825,7 +2416,7 @@ chroma_db/</code></pre>
                             <span class="lang-tag"><span class="platform-badge bash">Bash / Git Bash / Linux</span></span>
                             <button class="copy-btn" onclick="copyCode(this)">Copy</button>
                         </div>
-                        <pre><code>uv add langchain langchain-groq langchain-community langchain-text-splitters langchain-huggingface langchain-chroma pypdf beautifulsoup4 lxml python-dotenv sentence-transformers</code></pre>
+                        <pre><code>uv add langchain langchain-groq langchain-community langchain-text-splitters langchain-huggingface langchain-chroma pypdf beautifulsoup4 lxml python-dotenv sentence-transformers chromadb langchain-core</code></pre>
                     </div>
 
                     <div class="code-container" data-platform="macos">
@@ -1833,7 +2424,7 @@ chroma_db/</code></pre>
                             <span class="lang-tag"><span class="platform-badge macos">macOS</span></span>
                             <button class="copy-btn" onclick="copyCode(this)">Copy</button>
                         </div>
-                        <pre><code>uv add langchain langchain-groq langchain-community langchain-text-splitters langchain-huggingface langchain-chroma pypdf beautifulsoup4 lxml python-dotenv sentence-transformers</code></pre>
+                        <pre><code>uv add langchain langchain-groq langchain-community langchain-text-splitters langchain-huggingface langchain-chroma pypdf beautifulsoup4 lxml python-dotenv sentence-transformers chromadb langchain-core</code></pre>
                     </div>
 
                     <table>
@@ -1850,6 +2441,9 @@ chroma_db/</code></pre>
                             <tr><td><code>pypdf</code></td><td>PDF reading</td></tr>
                             <tr><td><code>beautifulsoup4</code>, <code>lxml</code></td><td>Web scraping</td></tr>
                             <tr><td><code>python-dotenv</code></td><td>Load .env file</td></tr>
+                            <tr><td><code>sentence-transformers</code></td><td>Embedding models</td></tr>
+                            <tr><td><code>chromadb</code></td><td>Vector database core</td></tr>
+                            <tr><td><code>langchain-core</code></td><td>Base abstractions</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -2311,6 +2905,30 @@ os.environ[<span class="string">"USER_AGENT"</span>] = <span class="string">"Moz
                         <p data-lang="pt"><strong>Nota:</strong> A primeira execução baixa o modelo de embeddings (~90MB). As próximas vezes serão mais rápidas.</p>
                     </div>
 
+                    <h4 data-lang="en">Interact with Your RAG System</h4>
+                    <h4 data-lang="zh">与你的 RAG 系统交互</h4>
+                    <h4 data-lang="hi">अपने RAG System के साथ interact करो</h4>
+                    <h4 data-lang="es">Interactúa con tu Sistema RAG</h4>
+                    <h4 data-lang="fr">Interagir avec votre Système RAG</h4>
+                    <h4 data-lang="ar">تفاعل مع نظام RAG الخاص بك</h4>
+                    <h4 data-lang="pt">Interagir com seu Sistema RAG</h4>
+
+                    <p data-lang="en">Once running, you can ask questions about your documents:</p>
+                    <p data-lang="zh">运行后，你可以问关于你文档的问题：</p>
+                    <p data-lang="hi">एक बार run होने पर, आप अपने documents के बारे में सवाल पूछ सकते हैं:</p>
+                    <p data-lang="es">Una vez en ejecución, puedes hacer preguntas sobre tus documentos:</p>
+                    <p data-lang="fr">Une fois lancé, vous pouvez poser des questions sur vos documents :</p>
+                    <p data-lang="ar">بمجرد التشغيل، تقدر تسأل أسئلة عن مستنداتك:</p>
+                    <p data-lang="pt">Uma vez rodando, podes fazer perguntas sobre teus documentos:</p>
+
+                    <div class="code-container">
+                        <pre><code>You: What is attention in transformers?
+AI: [Answer based on your documents]
+
+You: What are autonomous agents?
+AI: [Answer based on the web document]</code></pre>
+                    </div>
+
                     <h4 data-lang="en">Exit the Program</h4>
                     <h4 data-lang="zh">退出程序</h4>
                     <h4 data-lang="hi">Program बंद करो</h4>
@@ -2319,13 +2937,13 @@ os.environ[<span class="string">"USER_AGENT"</span>] = <span class="string">"Moz
                     <h4 data-lang="ar">إنهاء البرنامج</h4>
                     <h4 data-lang="pt">Sair do Programa</h4>
 
-                    <p data-lang="en">Type <code>quit</code>, <code>exit</code>, or press <code>Ctrl + C</code>.</p>
-                    <p data-lang="zh">输入 <code>quit</code>、<code>exit</code>，或者按 <code>Ctrl + C</code>。</p>
-                    <p data-lang="hi"><code>quit</code>, <code>exit</code> type करो, या <code>Ctrl + C</code> दबाओ।</p>
-                    <p data-lang="es">Escribe <code>quit</code>, <code>exit</code>, o presiona <code>Ctrl + C</code>.</p>
-                    <p data-lang="fr">Tape <code>quit</code>, <code>exit</code>, ou appuie sur <code>Ctrl + C</code>.</p>
-                    <p data-lang="ar">اكتب <code>quit</code>، <code>exit</code>، أو اضغط <code>Ctrl + C</code>.</p>
-                    <p data-lang="pt">Digita <code>quit</code>, <code>exit</code>, ou aperta <code>Ctrl + C</code>.</p>
+                    <p data-lang="en">Type <code>quit</code>, <code>exit</code>, <code>q</code>, or press <code>Ctrl + C</code>.</p>
+<p data-lang="zh">输入 <code>quit</code>、<code>exit</code>、<code>q</code>，或者按 <code>Ctrl + C</code>。</p>
+<p data-lang="hi"><code>quit</code>, <code>exit</code>, <code>q</code> type करो, या <code>Ctrl + C</code> दबाओ।</p>
+<p data-lang="es">Escribe <code>quit</code>, <code>exit</code>, <code>q</code>, o presiona <code>Ctrl + C</code>.</p>
+<p data-lang="fr">Tape <code>quit</code>, <code>exit</code>, <code>q</code>, ou appuie sur <code>Ctrl + C</code>.</p>
+<p data-lang="ar">اكتب <code>quit</code>، <code>exit</code>، <code>q</code>، أو اضغط <code>Ctrl + C</code>.</p>
+<p data-lang="pt">Digita <code>quit</code>, <code>exit</code>, <code>q</code>, ou aperta <code>Ctrl + C</code>.</p>
                 </div>
 
                 <div id="structure">
@@ -2389,12 +3007,18 @@ os.environ[<span class="string">"USER_AGENT"</span>] = <span class="string">"Moz
                             <tr><th>Problem</th><th>Solution</th></tr>
                         </thead>
                         <tbody>
-                            <tr><td><code>uv is not recognized</code></td><td>Install uv: <code>powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"</code> then restart terminal</td></tr>
-                            <tr><td><code>running scripts is disabled</code> (PowerShell)</td><td>Run: <code>Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser</code> then type <code>Y</code></td></tr>
+                            <tr><td><code>uv is not recognized</code></td><td>Install uv then restart terminal:<br>
+                                <span class="uv-install-cmd" data-platform="powershell"><code>powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"</code></span>
+                                <span class="uv-install-cmd" data-platform="bash"><code>curl -LsSf https://astral.sh/uv/install.sh | sh</code></span>
+                                <span class="uv-install-cmd" data-platform="macos"><code>curl -LsSf https://astral.sh/uv/install.sh | sh</code></span>
+                            </td></tr>
+                            <tr class="troubleshoot-row" data-platform="powershell"><td><code>running scripts is disabled</code> (PowerShell)</td><td>Run: <code>Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser</code> then type <code>Y</code></td></tr>
                             <tr><td><code>No module named X</code></td><td>Run <code>uv add &lt;package-name&gt;</code></td></tr>
                             <tr><td><code>GROQ_API_KEY not found</code></td><td>Check <code>.env</code> file exists with correct format</td></tr>
                             <tr><td><code>API key invalid</code></td><td>Get new key from <a href="https://console.groq.com/keys" target="_blank">console.groq.com/keys</a></td></tr>
                             <tr><td><code>Connection error</code></td><td>Check internet connection</td></tr>
+                            <tr><td><code>git is not recognized</code></td><td>Restart terminal/VS Code after Git installation</td></tr>
+                            <tr><td><code>Permission denied (publickey)</code></td><td>Use HTTPS URL instead of SSH, or set up SSH keys</td></tr>
                             <tr><td>Slow first run</td><td>Normal - downloading embedding model</td></tr>
                         </tbody>
                     </table>
@@ -3365,6 +3989,14 @@ cd langchain-rag</code></pre>
                     }
                 });
             });
+
+            // Toggle active-lang class on code containers with data-lang attribute
+            document.querySelectorAll('.code-container[data-lang]').forEach(container => {
+                container.classList.remove('active-lang');
+                if (container.dataset.lang === language) {
+                    container.classList.add('active-lang');
+                }
+            });
         }
 
         // Platform switching
@@ -3385,6 +4017,22 @@ cd langchain-rag</code></pre>
                 block.classList.remove('active');
                 if (block.dataset.platform === platform) {
                     block.classList.add('active');
+                }
+            });
+
+            // Toggle platform-specific inline commands (Prerequisites, Troubleshooting)
+            document.querySelectorAll('.uv-install-cmd[data-platform]').forEach(cmd => {
+                cmd.classList.remove('active');
+                if (cmd.dataset.platform === platform) {
+                    cmd.classList.add('active');
+                }
+            });
+
+            // Toggle platform-specific troubleshooting rows
+            document.querySelectorAll('.troubleshoot-row[data-platform]').forEach(row => {
+                row.classList.remove('active');
+                if (row.dataset.platform === platform) {
+                    row.classList.add('active');
                 }
             });
         }
